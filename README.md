@@ -45,3 +45,6 @@ Rscript TADHierarchy.R --inputFile sampleTADs.bedpe --outputDirectory outDir --t
 ```
 #### Output:
 The program will generate a .bedpe file named 'TADHierarchy.bedpe' in the _outputDirectory_. 
+
+## Sample Files:
+See the folder, "Examples", for a sample input file from 4DN, along with the "Merged TADs" and "TAD Hierarchy".

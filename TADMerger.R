@@ -138,6 +138,9 @@ finalDF <- data.frame(uniqueTADsDF$seqnames,
                       uniqueTADsDF$start,
                       uniqueTADsDF$end,
                       uniqueTADsDF$identifier)
+if (!dir.exists(outDir)) {
+  dir.create(outDir, recursive=TRUE)
+}
 writeLines(paste("#chr1", "\t",
                  "x1", "\t",
                  "x2", "\t",
@@ -145,8 +148,8 @@ writeLines(paste("#chr1", "\t",
                  "y1", "\t",
                  "y2", "\t",
                  "name"),
-           normalizePath(paste(outdir, "/mergedTADs.bedpe", sep=""))
+           paste(outDir, "/mergedTADs.bedpe", sep="")
 )
 
 # Save list of uniqueTADs
-write.table(finalDF, normalizePath(paste(outdir, "/mergedTADs.bedpe", sep="")), row.names=FALSE, col.names = FALSE, append = TRUE, quote = FALSE, sep = "\t")
+write.table(finalDF, normalizePath(paste(outDir, "/mergedTADs.bedpe", sep="")), row.names=FALSE, col.names = FALSE, append = TRUE, quote = FALSE, sep = "\t")

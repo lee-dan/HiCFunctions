@@ -154,7 +154,7 @@ writeLines(paste("#chr1", "\t",
                  "y2", "\t",
                  "identifier",
                  "children"),
-           normalizePath(paste(outDir, "/TADHierarchy.bedpe", sep=""))
+           paste(outDir, "/TADHierarchy.bedpe", sep="")
 )
 write.table(finalTADDF, 
             fileName, 
