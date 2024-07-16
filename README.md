@@ -13,10 +13,10 @@ This program merges TADs at different resolutions based on a maximum allowed thr
 ```
 Rscript TADMerger.R --inputDirectory ... --outputDirectory ... --resolutions ... --threshold ...
 ```
-*  **--inputDirectory**: The directory which contains the .bedpe files of TADs
+* **--inputDirectory**: The directory which contains the .bedpe files of TADs
 * **--outputDirectory**: The directory in which the merged TADs will be placed in
-*  **--resolutions**: The resolutions of TADs to be merged [e.g. 10000, 25000, 50000, etc.]
-*  **--threshold**: The maximum percentage [0 to 1] of linear overlapped area between any two TADs in order for them to still be considered unique. That is, if the area shared by TAD A and TAD B is greater than or equal to [threshold] of the area of both TADs, then the two TADs will be merged. 
+* **--resolutions**: The resolutions of TADs to be merged [e.g. 10000, 25000, 50000, etc.]
+* **--threshold**: The maximum percentage [0 to 1] of linear overlapped area between any two TADs in order for them to still be considered unique. That is, if the area shared by TAD A and TAD B is greater than or equal to [threshold] of the area of both TADs, then the two TADs will be merged. 
     * Eg. The boundaries of TAD A are [0, 100,000], and the boundaries of TAD B are [20,000, 90,000]. If the [threshold] = 0.7, then TAD A and TAD B will be merged.
     *  **The recommended value is 0.7.**
 
@@ -34,7 +34,7 @@ This program generates a hierarchy list for each TAD, detailing each of its 'chi
 ```
 Rscript TADHierarchy.R --inputFile ... --outputDirectory ... --threshold ...
 ```
-*  **--inputFile**: The .bedpe file containing the list of TADs.
+* **--inputFile**: The .bedpe file containing the list of TADs.
 * **--outputDirectory**: The directory in which the TAD hierarchy will be placed in.
 * **--threshold**: The minimum overlap percentage [0 to 1] for a TAD to be considered a 'child' TAD of another TAD.
     *  **The recommended value is 1.0**. 
@@ -46,5 +46,31 @@ Rscript TADHierarchy.R --inputFile sampleTADs.bedpe --outputDirectory outDir --t
 #### Output:
 The program will generate a .bedpe file named 'TADHierarchy.bedpe' in the _outputDirectory_. 
 
+### 3) Circular Packing Visualization [circularPackingTAD.R]
+This program creates an interactive circular packing visualization for a given set of TADs. 
+It requires a TAD Hierarchy file (created from *2) TAD Hierarchy*)
+
+#### Format:
+```
+Rscript circularPackingTAD.R --inputFile ... --chromosome ... --start ... --end ... --merge ... --title ... --outputFile ...
+```
+
+* **--inputFile**: The .bedpe file containing the hierarchal list of TADs.
+* **--chromosome**: Specifies which chromosome will be visualized.
+* **--start**: The starting index (lower bound) of the genomic range to be visualized
+* **--end**: The ending index (upper bound) of the genomic range to be visualized
+* **--merge**: Specify the *merging* method:
+    * I.e. For TADs that are a subTAD of two unique, nonhierarchal TADs (that is, neither one is a child of the other), the program will choose either the bigger parent TAD or the smaller parent TAD. 
+    * Enter "Bigger" or "Smaller". The default is "Bigger".
+* **--title**: The title of the chart to be created (NO SPACES)
+* **--outputFile**: The name of the output file to be created (omit file ending: .html)
+
+#### Example:
+```
+Rscript circularPackingTAD.R --inputFile TADHierarchy.bedpe --chromosome chr19 --start 43000000 --end 47000000 --merge Bigger --title TAD_Circular_Packing_Chart --outputFile TAD_Circular_Packing_Chart
+```
+#### Output:
+The program will generate a .html file named '*outputFile*'.
+
 ## Sample Files:
-See the folder, "Examples", for a sample input file from 4DN, along with the "Merged TADs" and "TAD Hierarchy".
+See the folder, "Examples", for a sample input file from 4DN, along with the "Merged TADs", "TAD Hierarchy", and "Circular Packing".
