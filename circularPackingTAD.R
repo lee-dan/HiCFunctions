@@ -28,6 +28,10 @@ merge <- options.args$merge
 title <- options.args$title
 outFile <- options.args$outputFile
 
+if (merge != "Bigger" && merge != "Smaller") {
+  merge = "Bigger"
+}
+
 # Save TADs as a data frame within selected range
 tads <- read.table(file = rawData, sep="\t")
 colnames(tads) <- c("chr1", "x1", "x2",

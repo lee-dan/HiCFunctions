@@ -1,5 +1,5 @@
 # HiCFunctions
-## Set of programs to operate on TADs and Loops
+## Set of programs to operate on TADs
 
 ## Availability
 The included programs are available via **command line** on this GitHub repository.
