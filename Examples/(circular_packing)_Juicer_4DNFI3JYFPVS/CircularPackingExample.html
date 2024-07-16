@@ -1,0 +1,5421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Circle Packing Chart in JavaScript</title>
+		<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-circle-packing.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-data-adapter.min.js"></script>
+		<style type="text/css">
+			html,
+			body,
+			#container {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+			<script>
+    
+				anychart.onDocumentReady(function () {
+
+					// load a json data file
+					var data = 
+[
+	{
+		"name": "master",
+		"id": 1,
+		"chromosome": "chr1",
+		"value": 191960000,
+		"start": 3000000,
+		"end": 194960000
+	},
+	{
+		"name": "TAD_2",
+		"id": 2,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1400000,
+		"start": 3000000,
+		"end": 4400000
+	},
+	{
+		"name": "TAD_4",
+		"id": 3,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 360000,
+		"start": 4400000,
+		"end": 4760000
+	},
+	{
+		"name": "TAD_5",
+		"id": 4,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 290000,
+		"start": 4800000,
+		"end": 5090000
+	},
+	{
+		"name": "TAD_6",
+		"id": 5,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1130000,
+		"start": 5050000,
+		"end": 6180000
+	},
+	{
+		"name": "TAD_8",
+		"id": 6,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 160000,
+		"start": 6230000,
+		"end": 6390000
+	},
+	{
+		"name": "TAD_9",
+		"id": 7,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 750000,
+		"start": 6250000,
+		"end": 7000000
+	},
+	{
+		"name": "TAD_10",
+		"id": 8,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 200000,
+		"start": 7000000,
+		"end": 7200000
+	},
+	{
+		"name": "TAD_11",
+		"id": 9,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2325000,
+		"start": 7200000,
+		"end": 9525000
+	},
+	{
+		"name": "TAD_21",
+		"id": 10,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 575000,
+		"start": 9550000,
+		"end": 10125000
+	},
+	{
+		"name": "TAD_22",
+		"id": 11,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 390000,
+		"start": 9740000,
+		"end": 10130000
+	},
+	{
+		"name": "TAD_23",
+		"id": 12,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2850000,
+		"start": 10150000,
+		"end": 13000000
+	},
+	{
+		"name": "TAD_32",
+		"id": 13,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 700000,
+		"start": 12950000,
+		"end": 13650000
+	},
+	{
+		"name": "TAD_34",
+		"id": 14,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2725000,
+		"start": 13700000,
+		"end": 16425000
+	},
+	{
+		"name": "TAD_40",
+		"id": 15,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 450000,
+		"start": 16025000,
+		"end": 16475000
+	},
+	{
+		"name": "TAD_42",
+		"id": 16,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1650000,
+		"start": 16500000,
+		"end": 18150000
+	},
+	{
+		"name": "TAD_48",
+		"id": 17,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 170000,
+		"start": 18140000,
+		"end": 18310000
+	},
+	{
+		"name": "TAD_49",
+		"id": 18,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 800000,
+		"start": 18250000,
+		"end": 19050000
+	},
+	{
+		"name": "TAD_50",
+		"id": 19,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2300000,
+		"start": 18300000,
+		"end": 20600000
+	},
+	{
+		"name": "TAD_53",
+		"id": 20,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 700000,
+		"start": 20600000,
+		"end": 21300000
+	},
+	{
+		"name": "TAD_56",
+		"id": 21,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 180000,
+		"start": 21160000,
+		"end": 21340000
+	},
+	{
+		"name": "TAD_57",
+		"id": 22,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1100000,
+		"start": 21350000,
+		"end": 22450000
+	},
+	{
+		"name": "TAD_58",
+		"id": 23,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 575000,
+		"start": 22550000,
+		"end": 23125000
+	},
+	{
+		"name": "TAD_59",
+		"id": 24,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 480000,
+		"start": 23200000,
+		"end": 23680000
+	},
+	{
+		"name": "TAD_60",
+		"id": 25,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 525000,
+		"start": 23725000,
+		"end": 24250000
+	},
+	{
+		"name": "TAD_61",
+		"id": 26,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 400000,
+		"start": 24275000,
+		"end": 24675000
+	},
+	{
+		"name": "TAD_62",
+		"id": 27,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1375000,
+		"start": 24325000,
+		"end": 25700000
+	},
+	{
+		"name": "TAD_64",
+		"id": 28,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 4800000,
+		"start": 25850000,
+		"end": 30650000
+	},
+	{
+		"name": "TAD_66",
+		"id": 29,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1450000,
+		"start": 29225000,
+		"end": 30675000
+	},
+	{
+		"name": "TAD_69",
+		"id": 30,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 475000,
+		"start": 30700000,
+		"end": 31175000
+	},
+	{
+		"name": "TAD_72",
+		"id": 31,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2375000,
+		"start": 31150000,
+		"end": 33525000
+	},
+	{
+		"name": "TAD_78",
+		"id": 32,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 825000,
+		"start": 33625000,
+		"end": 34450000
+	},
+	{
+		"name": "TAD_80",
+		"id": 33,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 150000,
+		"start": 34460000,
+		"end": 34610000
+	},
+	{
+		"name": "TAD_81",
+		"id": 34,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 380000,
+		"start": 34470000,
+		"end": 34850000
+	},
+	{
+		"name": "TAD_82",
+		"id": 35,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1675000,
+		"start": 34575000,
+		"end": 36250000
+	},
+	{
+		"name": "TAD_87",
+		"id": 36,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 170000,
+		"start": 36120000,
+		"end": 36290000
+	},
+	{
+		"name": "TAD_88",
+		"id": 37,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 440000,
+		"start": 36300000,
+		"end": 36740000
+	},
+	{
+		"name": "TAD_90",
+		"id": 38,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1525000,
+		"start": 36350000,
+		"end": 37875000
+	},
+	{
+		"name": "TAD_99",
+		"id": 39,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1400000,
+		"start": 38100000,
+		"end": 39500000
+	},
+	{
+		"name": "TAD_105",
+		"id": 40,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 170000,
+		"start": 39360000,
+		"end": 39530000
+	},
+	{
+		"name": "TAD_106",
+		"id": 41,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1200000,
+		"start": 39550000,
+		"end": 40750000
+	},
+	{
+		"name": "TAD_112",
+		"id": 42,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1950000,
+		"start": 40850000,
+		"end": 42800000
+	},
+	{
+		"name": "TAD_116",
+		"id": 43,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1200000,
+		"start": 42875000,
+		"end": 44075000
+	},
+	{
+		"name": "TAD_120",
+		"id": 44,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 380000,
+		"start": 43750000,
+		"end": 44130000
+	},
+	{
+		"name": "TAD_122",
+		"id": 45,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 7450000,
+		"start": 44150000,
+		"end": 51600000
+	},
+	{
+		"name": "TAD_137",
+		"id": 46,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 200000,
+		"start": 51410000,
+		"end": 51610000
+	},
+	{
+		"name": "TAD_138",
+		"id": 47,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 485000,
+		"start": 51625000,
+		"end": 52110000
+	},
+	{
+		"name": "TAD_140",
+		"id": 48,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2275000,
+		"start": 52250000,
+		"end": 54525000
+	},
+	{
+		"name": "TAD_146",
+		"id": 49,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 150000,
+		"start": 54380000,
+		"end": 54530000
+	},
+	{
+		"name": "TAD_147",
+		"id": 50,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 500000,
+		"start": 54525000,
+		"end": 55025000
+	},
+	{
+		"name": "TAD_149",
+		"id": 51,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 180000,
+		"start": 54990000,
+		"end": 55170000
+	},
+	{
+		"name": "TAD_150",
+		"id": 52,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 3150000,
+		"start": 55175000,
+		"end": 58325000
+	},
+	{
+		"name": "TAD_155",
+		"id": 53,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1000000,
+		"start": 57350000,
+		"end": 58350000
+	},
+	{
+		"name": "TAD_157",
+		"id": 54,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1225000,
+		"start": 58450000,
+		"end": 59675000
+	},
+	{
+		"name": "TAD_161",
+		"id": 55,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 450000,
+		"start": 59725000,
+		"end": 60175000
+	},
+	{
+		"name": "TAD_162",
+		"id": 56,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 450000,
+		"start": 60500000,
+		"end": 60950000
+	},
+	{
+		"name": "TAD_163",
+		"id": 57,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2500000,
+		"start": 60575000,
+		"end": 63075000
+	},
+	{
+		"name": "TAD_168",
+		"id": 58,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 415000,
+		"start": 63175000,
+		"end": 63590000
+	},
+	{
+		"name": "TAD_170",
+		"id": 59,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1875000,
+		"start": 63275000,
+		"end": 65150000
+	},
+	{
+		"name": "TAD_173",
+		"id": 60,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 605000,
+		"start": 64575000,
+		"end": 65180000
+	},
+	{
+		"name": "TAD_177",
+		"id": 61,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 6900000,
+		"start": 65250000,
+		"end": 72150000
+	},
+	{
+		"name": "TAD_195",
+		"id": 62,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1925000,
+		"start": 72250000,
+		"end": 74175000
+	},
+	{
+		"name": "TAD_201",
+		"id": 63,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 210000,
+		"start": 74200000,
+		"end": 74410000
+	},
+	{
+		"name": "TAD_202",
+		"id": 64,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1350000,
+		"start": 74225000,
+		"end": 75575000
+	},
+	{
+		"name": "TAD_204",
+		"id": 65,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 270000,
+		"start": 75320000,
+		"end": 75590000
+	},
+	{
+		"name": "TAD_205",
+		"id": 66,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2325000,
+		"start": 75600000,
+		"end": 77925000
+	},
+	{
+		"name": "TAD_209",
+		"id": 67,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 525000,
+		"start": 77925000,
+		"end": 78450000
+	},
+	{
+		"name": "TAD_212",
+		"id": 68,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 210000,
+		"start": 78490000,
+		"end": 78700000
+	},
+	{
+		"name": "TAD_213",
+		"id": 69,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1200000,
+		"start": 78500000,
+		"end": 79700000
+	},
+	{
+		"name": "TAD_214",
+		"id": 70,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 375000,
+		"start": 79775000,
+		"end": 80150000
+	},
+	{
+		"name": "TAD_215",
+		"id": 71,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 210000,
+		"start": 80200000,
+		"end": 80410000
+	},
+	{
+		"name": "TAD_217",
+		"id": 72,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1900000,
+		"start": 80800000,
+		"end": 82700000
+	},
+	{
+		"name": "TAD_220",
+		"id": 73,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 82520000,
+		"end": 82710000
+	},
+	{
+		"name": "TAD_221",
+		"id": 74,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 375000,
+		"start": 82700000,
+		"end": 83075000
+	},
+	{
+		"name": "TAD_223",
+		"id": 75,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1675000,
+		"start": 83000000,
+		"end": 84675000
+	},
+	{
+		"name": "TAD_228",
+		"id": 76,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 200000,
+		"start": 84480000,
+		"end": 84680000
+	},
+	{
+		"name": "TAD_229",
+		"id": 77,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 84700000,
+		"end": 84890000
+	},
+	{
+		"name": "TAD_230",
+		"id": 78,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 200000,
+		"start": 85840000,
+		"end": 86040000
+	},
+	{
+		"name": "TAD_231",
+		"id": 79,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 350000,
+		"start": 86050000,
+		"end": 86400000
+	},
+	{
+		"name": "TAD_233",
+		"id": 80,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 180000,
+		"start": 86360000,
+		"end": 86540000
+	},
+	{
+		"name": "TAD_235",
+		"id": 81,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 6600000,
+		"start": 86500000,
+		"end": 93100000
+	},
+	{
+		"name": "TAD_261",
+		"id": 82,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 890000,
+		"start": 92900000,
+		"end": 93790000
+	},
+	{
+		"name": "TAD_265",
+		"id": 83,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 3700000,
+		"start": 93950000,
+		"end": 97650000
+	},
+	{
+		"name": "TAD_272",
+		"id": 84,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 850000,
+		"start": 96850000,
+		"end": 97700000
+	},
+	{
+		"name": "TAD_273",
+		"id": 85,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 430000,
+		"start": 97750000,
+		"end": 98180000
+	},
+	{
+		"name": "TAD_274",
+		"id": 86,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 7250000,
+		"start": 98400000,
+		"end": 105650000
+	},
+	{
+		"name": "TAD_290",
+		"id": 87,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 280000,
+		"start": 105760000,
+		"end": 106040000
+	},
+	{
+		"name": "TAD_292",
+		"id": 88,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1050000,
+		"start": 105800000,
+		"end": 106850000
+	},
+	{
+		"name": "TAD_296",
+		"id": 89,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 4700000,
+		"start": 106900000,
+		"end": 111600000
+	},
+	{
+		"name": "TAD_301",
+		"id": 90,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 355000,
+		"start": 111275000,
+		"end": 111630000
+	},
+	{
+		"name": "TAD_303",
+		"id": 91,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 750000,
+		"start": 111650000,
+		"end": 112400000
+	},
+	{
+		"name": "TAD_306",
+		"id": 92,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 5800000,
+		"start": 112450000,
+		"end": 118250000
+	},
+	{
+		"name": "TAD_316",
+		"id": 93,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 730000,
+		"start": 117550000,
+		"end": 118280000
+	},
+	{
+		"name": "TAD_317",
+		"id": 94,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 118310000,
+		"end": 118500000
+	},
+	{
+		"name": "TAD_318",
+		"id": 95,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 450000,
+		"start": 118320000,
+		"end": 118770000
+	},
+	{
+		"name": "TAD_319",
+		"id": 96,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1550000,
+		"start": 118350000,
+		"end": 119900000
+	},
+	{
+		"name": "TAD_324",
+		"id": 97,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 400000,
+		"start": 119525000,
+		"end": 119925000
+	},
+	{
+		"name": "TAD_326",
+		"id": 98,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 150000,
+		"start": 120010000,
+		"end": 120160000
+	},
+	{
+		"name": "TAD_328",
+		"id": 99,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1300000,
+		"start": 120150000,
+		"end": 121450000
+	},
+	{
+		"name": "TAD_333",
+		"id": 100,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 320000,
+		"start": 121230000,
+		"end": 121550000
+	},
+	{
+		"name": "TAD_335",
+		"id": 101,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2750000,
+		"start": 121550000,
+		"end": 124300000
+	},
+	{
+		"name": "TAD_342",
+		"id": 102,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 260000,
+		"start": 124430000,
+		"end": 124690000
+	},
+	{
+		"name": "TAD_344",
+		"id": 103,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2950000,
+		"start": 124700000,
+		"end": 127650000
+	},
+	{
+		"name": "TAD_349",
+		"id": 104,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 750000,
+		"start": 126950000,
+		"end": 127700000
+	},
+	{
+		"name": "TAD_352",
+		"id": 105,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 270000,
+		"start": 127490000,
+		"end": 127760000
+	},
+	{
+		"name": "TAD_353",
+		"id": 106,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 465000,
+		"start": 127775000,
+		"end": 128240000
+	},
+	{
+		"name": "TAD_354",
+		"id": 107,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 540000,
+		"start": 128300000,
+		"end": 128840000
+	},
+	{
+		"name": "TAD_355",
+		"id": 108,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2700000,
+		"start": 128350000,
+		"end": 131050000
+	},
+	{
+		"name": "TAD_361",
+		"id": 109,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1350000,
+		"start": 130500000,
+		"end": 131850000
+	},
+	{
+		"name": "TAD_364",
+		"id": 110,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 595000,
+		"start": 131275000,
+		"end": 131870000
+	},
+	{
+		"name": "TAD_366",
+		"id": 111,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 280000,
+		"start": 131600000,
+		"end": 131880000
+	},
+	{
+		"name": "TAD_367",
+		"id": 112,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 4000000,
+		"start": 131900000,
+		"end": 135900000
+	},
+	{
+		"name": "TAD_388",
+		"id": 113,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 650000,
+		"start": 135825000,
+		"end": 136475000
+	},
+	{
+		"name": "TAD_390",
+		"id": 114,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 710000,
+		"start": 136500000,
+		"end": 137210000
+	},
+	{
+		"name": "TAD_393",
+		"id": 115,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2650000,
+		"start": 136750000,
+		"end": 139400000
+	},
+	{
+		"name": "TAD_400",
+		"id": 116,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1200000,
+		"start": 139450000,
+		"end": 140650000
+	},
+	{
+		"name": "TAD_402",
+		"id": 117,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 4150000,
+		"start": 139500000,
+		"end": 143650000
+	},
+	{
+		"name": "TAD_411",
+		"id": 118,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 170000,
+		"start": 143600000,
+		"end": 143770000
+	},
+	{
+		"name": "TAD_412",
+		"id": 119,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 630000,
+		"start": 143750000,
+		"end": 144380000
+	},
+	{
+		"name": "TAD_415",
+		"id": 120,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 6100000,
+		"start": 144200000,
+		"end": 150300000
+	},
+	{
+		"name": "TAD_422",
+		"id": 121,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 505000,
+		"start": 149820000,
+		"end": 150325000
+	},
+	{
+		"name": "TAD_423",
+		"id": 122,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 975000,
+		"start": 150400000,
+		"end": 151375000
+	},
+	{
+		"name": "TAD_425",
+		"id": 123,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 355000,
+		"start": 151025000,
+		"end": 151380000
+	},
+	{
+		"name": "TAD_426",
+		"id": 124,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2050000,
+		"start": 151400000,
+		"end": 153450000
+	},
+	{
+		"name": "TAD_436",
+		"id": 125,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2850000,
+		"start": 153500000,
+		"end": 156350000
+	},
+	{
+		"name": "TAD_447",
+		"id": 126,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 500000,
+		"start": 156025000,
+		"end": 156525000
+	},
+	{
+		"name": "TAD_449",
+		"id": 127,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 775000,
+		"start": 156700000,
+		"end": 157475000
+	},
+	{
+		"name": "TAD_452",
+		"id": 128,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 370000,
+		"start": 157130000,
+		"end": 157500000
+	},
+	{
+		"name": "TAD_454",
+		"id": 129,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2725000,
+		"start": 157450000,
+		"end": 160175000
+	},
+	{
+		"name": "TAD_461",
+		"id": 130,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 800000,
+		"start": 160200000,
+		"end": 161000000
+	},
+	{
+		"name": "TAD_466",
+		"id": 131,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 160000,
+		"start": 161030000,
+		"end": 161190000
+	},
+	{
+		"name": "TAD_467",
+		"id": 132,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1300000,
+		"start": 161200000,
+		"end": 162500000
+	},
+	{
+		"name": "TAD_472",
+		"id": 133,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 180000,
+		"start": 162530000,
+		"end": 162710000
+	},
+	{
+		"name": "TAD_473",
+		"id": 134,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 310000,
+		"start": 162770000,
+		"end": 163080000
+	},
+	{
+		"name": "TAD_474",
+		"id": 135,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1100000,
+		"start": 162850000,
+		"end": 163950000
+	},
+	{
+		"name": "TAD_476",
+		"id": 136,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 350000,
+		"start": 163925000,
+		"end": 164275000
+	},
+	{
+		"name": "TAD_477",
+		"id": 137,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 910000,
+		"start": 164250000,
+		"end": 165160000
+	},
+	{
+		"name": "TAD_479",
+		"id": 138,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 425000,
+		"start": 165200000,
+		"end": 165625000
+	},
+	{
+		"name": "TAD_480",
+		"id": 139,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 180000,
+		"start": 165580000,
+		"end": 165760000
+	},
+	{
+		"name": "TAD_481",
+		"id": 140,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2000000,
+		"start": 165650000,
+		"end": 167650000
+	},
+	{
+		"name": "TAD_485",
+		"id": 141,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 4450000,
+		"start": 166350000,
+		"end": 170800000
+	},
+	{
+		"name": "TAD_498",
+		"id": 142,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 200000,
+		"start": 170640000,
+		"end": 170840000
+	},
+	{
+		"name": "TAD_499",
+		"id": 143,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 170870000,
+		"end": 171060000
+	},
+	{
+		"name": "TAD_500",
+		"id": 144,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 450000,
+		"start": 171050000,
+		"end": 171500000
+	},
+	{
+		"name": "TAD_503",
+		"id": 145,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 6300000,
+		"start": 171500000,
+		"end": 177800000
+	},
+	{
+		"name": "TAD_524",
+		"id": 146,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 675000,
+		"start": 177800000,
+		"end": 178475000
+	},
+	{
+		"name": "TAD_525",
+		"id": 147,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1625000,
+		"start": 177850000,
+		"end": 179475000
+	},
+	{
+		"name": "TAD_530",
+		"id": 148,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 290000,
+		"start": 179500000,
+		"end": 179790000
+	},
+	{
+		"name": "TAD_531",
+		"id": 149,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1175000,
+		"start": 179600000,
+		"end": 180775000
+	},
+	{
+		"name": "TAD_535",
+		"id": 150,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 530000,
+		"start": 180250000,
+		"end": 180780000
+	},
+	{
+		"name": "TAD_536",
+		"id": 151,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 230000,
+		"start": 180570000,
+		"end": 180800000
+	},
+	{
+		"name": "TAD_537",
+		"id": 152,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 400000,
+		"start": 180825000,
+		"end": 181225000
+	},
+	{
+		"name": "TAD_538",
+		"id": 153,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1650000,
+		"start": 180850000,
+		"end": 182500000
+	},
+	{
+		"name": "TAD_544",
+		"id": 154,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 410000,
+		"start": 182130000,
+		"end": 182540000
+	},
+	{
+		"name": "TAD_549",
+		"id": 155,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 2250000,
+		"start": 182550000,
+		"end": 184800000
+	},
+	{
+		"name": "TAD_557",
+		"id": 156,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 700000,
+		"start": 184800000,
+		"end": 185500000
+	},
+	{
+		"name": "TAD_560",
+		"id": 157,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 3450000,
+		"start": 185500000,
+		"end": 188950000
+	},
+	{
+		"name": "TAD_568",
+		"id": 158,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 700000,
+		"start": 188950000,
+		"end": 189650000
+	},
+	{
+		"name": "TAD_569",
+		"id": 159,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1800000,
+		"start": 189000000,
+		"end": 190800000
+	},
+	{
+		"name": "TAD_573",
+		"id": 160,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1175000,
+		"start": 189700000,
+		"end": 190875000
+	},
+	{
+		"name": "TAD_575",
+		"id": 161,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 390000,
+		"start": 190900000,
+		"end": 191290000
+	},
+	{
+		"name": "TAD_576",
+		"id": 162,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 900000,
+		"start": 190925000,
+		"end": 191825000
+	},
+	{
+		"name": "TAD_580",
+		"id": 163,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1900000,
+		"start": 191250000,
+		"end": 193150000
+	},
+	{
+		"name": "TAD_586",
+		"id": 164,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 193180000,
+		"end": 193370000
+	},
+	{
+		"name": "TAD_588",
+		"id": 165,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 1350000,
+		"start": 193350000,
+		"end": 194700000
+	},
+	{
+		"name": "TAD_591",
+		"id": 166,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 190000,
+		"start": 194620000,
+		"end": 194810000
+	},
+	{
+		"name": "TAD_592",
+		"id": 167,
+		"chromosome": "chr1",
+		"parent": 1,
+		"value": 130000,
+		"start": 194830000,
+		"end": 194960000
+	},
+	{
+		"name": "TAD_3",
+		"id": 168,
+		"chromosome": "chr1",
+		"parent": 2,
+		"value": 675000,
+		"start": 3650000,
+		"end": 4325000
+	},
+	{
+		"name": "TAD_1",
+		"id": 169,
+		"chromosome": "chr1",
+		"parent": 2,
+		"value": 575000,
+		"start": 3000000,
+		"end": 3575000
+	},
+	{
+		"name": "TAD_7",
+		"id": 170,
+		"chromosome": "chr1",
+		"parent": 5,
+		"value": 260000,
+		"start": 5910000,
+		"end": 6170000
+	},
+	{
+		"name": "TAD_15",
+		"id": 171,
+		"chromosome": "chr1",
+		"parent": 9,
+		"value": 1150000,
+		"start": 8300000,
+		"end": 9450000
+	},
+	{
+		"name": "TAD_13",
+		"id": 172,
+		"chromosome": "chr1",
+		"parent": 9,
+		"value": 875000,
+		"start": 7400000,
+		"end": 8275000
+	},
+	{
+		"name": "TAD_18",
+		"id": 173,
+		"chromosome": "chr1",
+		"parent": 9,
+		"value": 375000,
+		"start": 9150000,
+		"end": 9525000
+	},
+	{
+		"name": "TAD_12",
+		"id": 174,
+		"chromosome": "chr1",
+		"parent": 9,
+		"value": 170000,
+		"start": 7210000,
+		"end": 7380000
+	},
+	{
+		"name": "TAD_14",
+		"id": 175,
+		"chromosome": "chr1",
+		"parent": 172,
+		"value": 230000,
+		"start": 7550000,
+		"end": 7780000
+	},
+	{
+		"name": "TAD_16",
+		"id": 176,
+		"chromosome": "chr1",
+		"parent": 171,
+		"value": 775000,
+		"start": 8350000,
+		"end": 9125000
+	},
+	{
+		"name": "TAD_17",
+		"id": 177,
+		"chromosome": "chr1",
+		"parent": 176,
+		"value": 350000,
+		"start": 8400000,
+		"end": 8750000
+	},
+	{
+		"name": "TAD_19",
+		"id": 178,
+		"chromosome": "chr1",
+		"parent": 173,
+		"value": 210000,
+		"start": 9300000,
+		"end": 9510000
+	},
+	{
+		"name": "TAD_20",
+		"id": 179,
+		"chromosome": "chr1",
+		"parent": 10,
+		"value": 170000,
+		"start": 9550000,
+		"end": 9720000
+	},
+	{
+		"name": "TAD_25",
+		"id": 180,
+		"chromosome": "chr1",
+		"parent": 12,
+		"value": 1250000,
+		"start": 10350000,
+		"end": 11600000
+	},
+	{
+		"name": "TAD_29",
+		"id": 181,
+		"chromosome": "chr1",
+		"parent": 12,
+		"value": 1200000,
+		"start": 11650000,
+		"end": 12850000
+	},
+	{
+		"name": "TAD_24",
+		"id": 182,
+		"chromosome": "chr1",
+		"parent": 12,
+		"value": 595000,
+		"start": 10175000,
+		"end": 10770000
+	},
+	{
+		"name": "TAD_31",
+		"id": 183,
+		"chromosome": "chr1",
+		"parent": 12,
+		"value": 130000,
+		"start": 12850000,
+		"end": 12980000
+	},
+	{
+		"name": "TAD_26",
+		"id": 184,
+		"chromosome": "chr1",
+		"parent": 180,
+		"value": 800000,
+		"start": 10800000,
+		"end": 11600000
+	},
+	{
+		"name": "TAD_28",
+		"id": 185,
+		"chromosome": "chr1",
+		"parent": 184,
+		"value": 425000,
+		"start": 11150000,
+		"end": 11575000
+	},
+	{
+		"name": "TAD_27",
+		"id": 186,
+		"chromosome": "chr1",
+		"parent": 184,
+		"value": 180000,
+		"start": 10810000,
+		"end": 10990000
+	},
+	{
+		"name": "TAD_30",
+		"id": 187,
+		"chromosome": "chr1",
+		"parent": 181,
+		"value": 150000,
+		"start": 12690000,
+		"end": 12840000
+	},
+	{
+		"name": "TAD_33",
+		"id": 188,
+		"chromosome": "chr1",
+		"parent": 13,
+		"value": 160000,
+		"start": 13380000,
+		"end": 13540000
+	},
+	{
+		"name": "TAD_37",
+		"id": 189,
+		"chromosome": "chr1",
+		"parent": 14,
+		"value": 1500000,
+		"start": 14925000,
+		"end": 16425000
+	},
+	{
+		"name": "TAD_35",
+		"id": 190,
+		"chromosome": "chr1",
+		"parent": 14,
+		"value": 1100000,
+		"start": 13750000,
+		"end": 14850000
+	},
+	{
+		"name": "TAD_36",
+		"id": 191,
+		"chromosome": "chr1",
+		"parent": 14,
+		"value": 230000,
+		"start": 14730000,
+		"end": 14960000
+	},
+	{
+		"name": "TAD_38",
+		"id": 192,
+		"chromosome": "chr1",
+		"parent": 189,
+		"value": 650000,
+		"start": 14975000,
+		"end": 15625000
+	},
+	{
+		"name": "TAD_41",
+		"id": 193,
+		"chromosome": "chr1",
+		"parent": 189,
+		"value": 310000,
+		"start": 16110000,
+		"end": 16420000
+	},
+	{
+		"name": "TAD_39",
+		"id": 194,
+		"chromosome": "chr1",
+		"parent": 189,
+		"value": 220000,
+		"start": 15650000,
+		"end": 15870000
+	},
+	{
+		"name": "TAD_44",
+		"id": 195,
+		"chromosome": "chr1",
+		"parent": 16,
+		"value": 1000000,
+		"start": 17125000,
+		"end": 18125000
+	},
+	{
+		"name": "TAD_43",
+		"id": 196,
+		"chromosome": "chr1",
+		"parent": 16,
+		"value": 520000,
+		"start": 16600000,
+		"end": 17120000
+	},
+	{
+		"name": "TAD_47",
+		"id": 197,
+		"chromosome": "chr1",
+		"parent": 16,
+		"value": 170000,
+		"start": 17960000,
+		"end": 18130000
+	},
+	{
+		"name": "TAD_45",
+		"id": 198,
+		"chromosome": "chr1",
+		"parent": 195,
+		"value": 480000,
+		"start": 17150000,
+		"end": 17630000
+	},
+	{
+		"name": "TAD_46",
+		"id": 199,
+		"chromosome": "chr1",
+		"parent": 195,
+		"value": 450000,
+		"start": 17650000,
+		"end": 18100000
+	},
+	{
+		"name": "TAD_51",
+		"id": 200,
+		"chromosome": "chr1",
+		"parent": 19,
+		"value": 1400000,
+		"start": 19150000,
+		"end": 20550000
+	},
+	{
+		"name": "TAD_52",
+		"id": 201,
+		"chromosome": "chr1",
+		"parent": 200,
+		"value": 250000,
+		"start": 20290000,
+		"end": 20540000
+	},
+	{
+		"name": "TAD_55",
+		"id": 202,
+		"chromosome": "chr1",
+		"parent": 20,
+		"value": 190000,
+		"start": 20950000,
+		"end": 21140000
+	},
+	{
+		"name": "TAD_54",
+		"id": 203,
+		"chromosome": "chr1",
+		"parent": 20,
+		"value": 160000,
+		"start": 20760000,
+		"end": 20920000
+	},
+	{
+		"name": "TAD_63",
+		"id": 204,
+		"chromosome": "chr1",
+		"parent": 27,
+		"value": 780000,
+		"start": 24700000,
+		"end": 25480000
+	},
+	{
+		"name": "TAD_65",
+		"id": 205,
+		"chromosome": "chr1",
+		"parent": 28,
+		"value": 875000,
+		"start": 25900000,
+		"end": 26775000
+	},
+	{
+		"name": "TAD_67",
+		"id": 206,
+		"chromosome": "chr1",
+		"parent": 28,
+		"value": 375000,
+		"start": 30275000,
+		"end": 30650000
+	},
+	{
+		"name": "TAD_68",
+		"id": 207,
+		"chromosome": "chr1",
+		"parent": 206,
+		"value": 240000,
+		"start": 30370000,
+		"end": 30610000
+	},
+	{
+		"name": "TAD_71",
+		"id": 208,
+		"chromosome": "chr1",
+		"parent": 30,
+		"value": 190000,
+		"start": 30960000,
+		"end": 31150000
+	},
+	{
+		"name": "TAD_70",
+		"id": 209,
+		"chromosome": "chr1",
+		"parent": 30,
+		"value": 180000,
+		"start": 30770000,
+		"end": 30950000
+	},
+	{
+		"name": "TAD_73",
+		"id": 210,
+		"chromosome": "chr1",
+		"parent": 31,
+		"value": 800000,
+		"start": 31200000,
+		"end": 32000000
+	},
+	{
+		"name": "TAD_76",
+		"id": 211,
+		"chromosome": "chr1",
+		"parent": 31,
+		"value": 675000,
+		"start": 32850000,
+		"end": 33525000
+	},
+	{
+		"name": "TAD_75",
+		"id": 212,
+		"chromosome": "chr1",
+		"parent": 31,
+		"value": 625000,
+		"start": 32075000,
+		"end": 32700000
+	},
+	{
+		"name": "TAD_74",
+		"id": 213,
+		"chromosome": "chr1",
+		"parent": 210,
+		"value": 140000,
+		"start": 31210000,
+		"end": 31350000
+	},
+	{
+		"name": "TAD_79",
+		"id": 214,
+		"chromosome": "chr1",
+		"parent": 215,
+		"value": 130000,
+		"start": 33640000,
+		"end": 33770000
+	},
+	{
+		"name": "TAD_77",
+		"id": 215,
+		"chromosome": "chr1",
+		"parent": 32,
+		"value": 550000,
+		"start": 33625000,
+		"end": 34175000
+	},
+	{
+		"name": "TAD_83",
+		"id": 216,
+		"chromosome": "chr1",
+		"parent": 35,
+		"value": 750000,
+		"start": 34850000,
+		"end": 35600000
+	},
+	{
+		"name": "TAD_85",
+		"id": 217,
+		"chromosome": "chr1",
+		"parent": 35,
+		"value": 400000,
+		"start": 35725000,
+		"end": 36125000
+	},
+	{
+		"name": "TAD_84",
+		"id": 218,
+		"chromosome": "chr1",
+		"parent": 35,
+		"value": 220000,
+		"start": 35490000,
+		"end": 35710000
+	},
+	{
+		"name": "TAD_86",
+		"id": 219,
+		"chromosome": "chr1",
+		"parent": 217,
+		"value": 250000,
+		"start": 35820000,
+		"end": 36070000
+	},
+	{
+		"name": "TAD_89",
+		"id": 220,
+		"chromosome": "chr1",
+		"parent": 37,
+		"value": 170000,
+		"start": 36330000,
+		"end": 36500000
+	},
+	{
+		"name": "TAD_93",
+		"id": 221,
+		"chromosome": "chr1",
+		"parent": 38,
+		"value": 620000,
+		"start": 37250000,
+		"end": 37870000
+	},
+	{
+		"name": "TAD_92",
+		"id": 222,
+		"chromosome": "chr1",
+		"parent": 38,
+		"value": 465000,
+		"start": 36775000,
+		"end": 37240000
+	},
+	{
+		"name": "TAD_91",
+		"id": 223,
+		"chromosome": "chr1",
+		"parent": 38,
+		"value": 230000,
+		"start": 36510000,
+		"end": 36740000
+	},
+	{
+		"name": "TAD_95",
+		"id": 224,
+		"chromosome": "chr1",
+		"parent": 221,
+		"value": 400000,
+		"start": 37260000,
+		"end": 37660000
+	},
+	{
+		"name": "TAD_97",
+		"id": 225,
+		"chromosome": "chr1",
+		"parent": 221,
+		"value": 180000,
+		"start": 37680000,
+		"end": 37860000
+	},
+	{
+		"name": "TAD_96",
+		"id": 226,
+		"chromosome": "chr1",
+		"parent": 224,
+		"value": 200000,
+		"start": 37440000,
+		"end": 37640000
+	},
+	{
+		"name": "TAD_94",
+		"id": 227,
+		"chromosome": "chr1",
+		"parent": 224,
+		"value": 160000,
+		"start": 37260000,
+		"end": 37420000
+	},
+	{
+		"name": "TAD_98",
+		"id": 228,
+		"chromosome": "chr1",
+		"parent": 39,
+		"value": 700000,
+		"start": 38100000,
+		"end": 38800000
+	},
+	{
+		"name": "TAD_101",
+		"id": 229,
+		"chromosome": "chr1",
+		"parent": 39,
+		"value": 650000,
+		"start": 38850000,
+		"end": 39500000
+	},
+	{
+		"name": "TAD_100",
+		"id": 230,
+		"chromosome": "chr1",
+		"parent": 39,
+		"value": 170000,
+		"start": 38800000,
+		"end": 38970000
+	},
+	{
+		"name": "TAD_102",
+		"id": 231,
+		"chromosome": "chr1",
+		"parent": 229,
+		"value": 360000,
+		"start": 38990000,
+		"end": 39350000
+	},
+	{
+		"name": "TAD_103",
+		"id": 232,
+		"chromosome": "chr1",
+		"parent": 231,
+		"value": 180000,
+		"start": 39000000,
+		"end": 39180000
+	},
+	{
+		"name": "TAD_104",
+		"id": 233,
+		"chromosome": "chr1",
+		"parent": 231,
+		"value": 140000,
+		"start": 39210000,
+		"end": 39350000
+	},
+	{
+		"name": "TAD_108",
+		"id": 234,
+		"chromosome": "chr1",
+		"parent": 41,
+		"value": 750000,
+		"start": 40000000,
+		"end": 40750000
+	},
+	{
+		"name": "TAD_107",
+		"id": 235,
+		"chromosome": "chr1",
+		"parent": 41,
+		"value": 400000,
+		"start": 39575000,
+		"end": 39975000
+	},
+	{
+		"name": "TAD_109",
+		"id": 236,
+		"chromosome": "chr1",
+		"parent": 234,
+		"value": 480000,
+		"start": 40070000,
+		"end": 40550000
+	},
+	{
+		"name": "TAD_110",
+		"id": 237,
+		"chromosome": "chr1",
+		"parent": 236,
+		"value": 270000,
+		"start": 40100000,
+		"end": 40370000
+	},
+	{
+		"name": "TAD_111",
+		"id": 238,
+		"chromosome": "chr1",
+		"parent": 236,
+		"value": 170000,
+		"start": 40380000,
+		"end": 40550000
+	},
+	{
+		"name": "TAD_115",
+		"id": 239,
+		"chromosome": "chr1",
+		"parent": 42,
+		"value": 900000,
+		"start": 41800000,
+		"end": 42700000
+	},
+	{
+		"name": "TAD_114",
+		"id": 240,
+		"chromosome": "chr1",
+		"parent": 42,
+		"value": 650000,
+		"start": 41125000,
+		"end": 41775000
+	},
+	{
+		"name": "TAD_113",
+		"id": 241,
+		"chromosome": "chr1",
+		"parent": 42,
+		"value": 210000,
+		"start": 40860000,
+		"end": 41070000
+	},
+	{
+		"name": "TAD_119",
+		"id": 242,
+		"chromosome": "chr1",
+		"parent": 43,
+		"value": 605000,
+		"start": 43125000,
+		"end": 43730000
+	},
+	{
+		"name": "TAD_117",
+		"id": 243,
+		"chromosome": "chr1",
+		"parent": 43,
+		"value": 210000,
+		"start": 42880000,
+		"end": 43090000
+	},
+	{
+		"name": "TAD_118",
+		"id": 244,
+		"chromosome": "chr1",
+		"parent": 43,
+		"value": 170000,
+		"start": 43110000,
+		"end": 43280000
+	},
+	{
+		"name": "TAD_126",
+		"id": 245,
+		"chromosome": "chr1",
+		"parent": 249,
+		"value": 1050000,
+		"start": 44725000,
+		"end": 45775000
+	},
+	{
+		"name": "TAD_123",
+		"id": 246,
+		"chromosome": "chr1",
+		"parent": 249,
+		"value": 550000,
+		"start": 44175000,
+		"end": 44725000
+	},
+	{
+		"name": "TAD_125",
+		"id": 247,
+		"chromosome": "chr1",
+		"parent": 249,
+		"value": 210000,
+		"start": 44520000,
+		"end": 44730000
+	},
+	{
+		"name": "TAD_131",
+		"id": 248,
+		"chromosome": "chr1",
+		"parent": 45,
+		"value": 5050000,
+		"start": 46350000,
+		"end": 51400000
+	},
+	{
+		"name": "TAD_121",
+		"id": 249,
+		"chromosome": "chr1",
+		"parent": 45,
+		"value": 1625000,
+		"start": 44150000,
+		"end": 45775000
+	},
+	{
+		"name": "TAD_129",
+		"id": 250,
+		"chromosome": "chr1",
+		"parent": 45,
+		"value": 600000,
+		"start": 45800000,
+		"end": 46400000
+	},
+	{
+		"name": "TAD_124",
+		"id": 251,
+		"chromosome": "chr1",
+		"parent": 246,
+		"value": 210000,
+		"start": 44260000,
+		"end": 44470000
+	},
+	{
+		"name": "TAD_128",
+		"id": 252,
+		"chromosome": "chr1",
+		"parent": 245,
+		"value": 445000,
+		"start": 45325000,
+		"end": 45770000
+	},
+	{
+		"name": "TAD_127",
+		"id": 253,
+		"chromosome": "chr1",
+		"parent": 245,
+		"value": 375000,
+		"start": 44750000,
+		"end": 45125000
+	},
+	{
+		"name": "TAD_130",
+		"id": 254,
+		"chromosome": "chr1",
+		"parent": 250,
+		"value": 240000,
+		"start": 45810000,
+		"end": 46050000
+	},
+	{
+		"name": "TAD_132",
+		"id": 255,
+		"chromosome": "chr1",
+		"parent": 248,
+		"value": 825000,
+		"start": 46425000,
+		"end": 47250000
+	},
+	{
+		"name": "TAD_135",
+		"id": 256,
+		"chromosome": "chr1",
+		"parent": 248,
+		"value": 625000,
+		"start": 50275000,
+		"end": 50900000
+	},
+	{
+		"name": "TAD_134",
+		"id": 257,
+		"chromosome": "chr1",
+		"parent": 248,
+		"value": 450000,
+		"start": 48425000,
+		"end": 48875000
+	},
+	{
+		"name": "TAD_136",
+		"id": 258,
+		"chromosome": "chr1",
+		"parent": 248,
+		"value": 405000,
+		"start": 50925000,
+		"end": 51330000
+	},
+	{
+		"name": "TAD_133",
+		"id": 259,
+		"chromosome": "chr1",
+		"parent": 255,
+		"value": 200000,
+		"start": 46570000,
+		"end": 46770000
+	},
+	{
+		"name": "TAD_141",
+		"id": 260,
+		"chromosome": "chr1",
+		"parent": 48,
+		"value": 1500000,
+		"start": 53000000,
+		"end": 54500000
+	},
+	{
+		"name": "TAD_139",
+		"id": 261,
+		"chromosome": "chr1",
+		"parent": 48,
+		"value": 780000,
+		"start": 52250000,
+		"end": 53030000
+	},
+	{
+		"name": "TAD_145",
+		"id": 262,
+		"chromosome": "chr1",
+		"parent": 260,
+		"value": 450000,
+		"start": 53925000,
+		"end": 54375000
+	},
+	{
+		"name": "TAD_143",
+		"id": 263,
+		"chromosome": "chr1",
+		"parent": 260,
+		"value": 340000,
+		"start": 53350000,
+		"end": 53690000
+	},
+	{
+		"name": "TAD_142",
+		"id": 264,
+		"chromosome": "chr1",
+		"parent": 260,
+		"value": 240000,
+		"start": 53050000,
+		"end": 53290000
+	},
+	{
+		"name": "TAD_144",
+		"id": 265,
+		"chromosome": "chr1",
+		"parent": 260,
+		"value": 190000,
+		"start": 53710000,
+		"end": 53900000
+	},
+	{
+		"name": "TAD_148",
+		"id": 266,
+		"chromosome": "chr1",
+		"parent": 50,
+		"value": 350000,
+		"start": 54630000,
+		"end": 54980000
+	},
+	{
+		"name": "TAD_153",
+		"id": 267,
+		"chromosome": "chr1",
+		"parent": 52,
+		"value": 1425000,
+		"start": 55850000,
+		"end": 57275000
+	},
+	{
+		"name": "TAD_152",
+		"id": 268,
+		"chromosome": "chr1",
+		"parent": 52,
+		"value": 610000,
+		"start": 55240000,
+		"end": 55850000
+	},
+	{
+		"name": "TAD_154",
+		"id": 269,
+		"chromosome": "chr1",
+		"parent": 52,
+		"value": 360000,
+		"start": 56990000,
+		"end": 57350000
+	},
+	{
+		"name": "TAD_151",
+		"id": 270,
+		"chromosome": "chr1",
+		"parent": 52,
+		"value": 180000,
+		"start": 55210000,
+		"end": 55390000
+	},
+	{
+		"name": "TAD_156",
+		"id": 271,
+		"chromosome": "chr1",
+		"parent": 53,
+		"value": 230000,
+		"start": 58110000,
+		"end": 58340000
+	},
+	{
+		"name": "TAD_160",
+		"id": 272,
+		"chromosome": "chr1",
+		"parent": 54,
+		"value": 425000,
+		"start": 59225000,
+		"end": 59650000
+	},
+	{
+		"name": "TAD_159",
+		"id": 273,
+		"chromosome": "chr1",
+		"parent": 54,
+		"value": 220000,
+		"start": 59000000,
+		"end": 59220000
+	},
+	{
+		"name": "TAD_158",
+		"id": 274,
+		"chromosome": "chr1",
+		"parent": 54,
+		"value": 190000,
+		"start": 58550000,
+		"end": 58740000
+	},
+	{
+		"name": "TAD_165",
+		"id": 275,
+		"chromosome": "chr1",
+		"parent": 57,
+		"value": 1125000,
+		"start": 61850000,
+		"end": 62975000
+	},
+	{
+		"name": "TAD_164",
+		"id": 276,
+		"chromosome": "chr1",
+		"parent": 57,
+		"value": 750000,
+		"start": 61050000,
+		"end": 61800000
+	},
+	{
+		"name": "TAD_167",
+		"id": 277,
+		"chromosome": "chr1",
+		"parent": 57,
+		"value": 290000,
+		"start": 62710000,
+		"end": 63000000
+	},
+	{
+		"name": "TAD_166",
+		"id": 278,
+		"chromosome": "chr1",
+		"parent": 275,
+		"value": 290000,
+		"start": 62400000,
+		"end": 62690000
+	},
+	{
+		"name": "TAD_171",
+		"id": 279,
+		"chromosome": "chr1",
+		"parent": 280,
+		"value": 880000,
+		"start": 63620000,
+		"end": 64500000
+	},
+	{
+		"name": "TAD_169",
+		"id": 280,
+		"chromosome": "chr1",
+		"parent": 59,
+		"value": 1275000,
+		"start": 63275000,
+		"end": 64550000
+	},
+	{
+		"name": "TAD_172",
+		"id": 281,
+		"chromosome": "chr1",
+		"parent": 59,
+		"value": 140000,
+		"start": 64560000,
+		"end": 64700000
+	},
+	{
+		"name": "TAD_174",
+		"id": 282,
+		"chromosome": "chr1",
+		"parent": 60,
+		"value": 160000,
+		"start": 65020000,
+		"end": 65180000
+	},
+	{
+		"name": "TAD_178",
+		"id": 283,
+		"chromosome": "chr1",
+		"parent": 284,
+		"value": 375000,
+		"start": 65275000,
+		"end": 65650000
+	},
+	{
+		"name": "TAD_175",
+		"id": 284,
+		"chromosome": "chr1",
+		"parent": 288,
+		"value": 800000,
+		"start": 65250000,
+		"end": 66050000
+	},
+	{
+		"name": "TAD_179",
+		"id": 285,
+		"chromosome": "chr1",
+		"parent": 288,
+		"value": 800000,
+		"start": 66100000,
+		"end": 66900000
+	},
+	{
+		"name": "TAD_186",
+		"id": 286,
+		"chromosome": "chr1",
+		"parent": 61,
+		"value": 2950000,
+		"start": 69200000,
+		"end": 72150000
+	},
+	{
+		"name": "TAD_181",
+		"id": 287,
+		"chromosome": "chr1",
+		"parent": 61,
+		"value": 2075000,
+		"start": 67100000,
+		"end": 69175000
+	},
+	{
+		"name": "TAD_176",
+		"id": 288,
+		"chromosome": "chr1",
+		"parent": 61,
+		"value": 1725000,
+		"start": 65250000,
+		"end": 66975000
+	},
+	{
+		"name": "TAD_180",
+		"id": 289,
+		"chromosome": "chr1",
+		"parent": 61,
+		"value": 170000,
+		"start": 66870000,
+		"end": 67040000
+	},
+	{
+		"name": "TAD_184",
+		"id": 290,
+		"chromosome": "chr1",
+		"parent": 287,
+		"value": 1040000,
+		"start": 68100000,
+		"end": 69140000
+	},
+	{
+		"name": "TAD_183",
+		"id": 291,
+		"chromosome": "chr1",
+		"parent": 287,
+		"value": 475000,
+		"start": 67600000,
+		"end": 68075000
+	},
+	{
+		"name": "TAD_182",
+		"id": 292,
+		"chromosome": "chr1",
+		"parent": 287,
+		"value": 400000,
+		"start": 67125000,
+		"end": 67525000
+	},
+	{
+		"name": "TAD_189",
+		"id": 293,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 775000,
+		"start": 70750000,
+		"end": 71525000
+	},
+	{
+		"name": "TAD_185",
+		"id": 294,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 550000,
+		"start": 69200000,
+		"end": 69750000
+	},
+	{
+		"name": "TAD_193",
+		"id": 295,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 550000,
+		"start": 71600000,
+		"end": 72150000
+	},
+	{
+		"name": "TAD_188",
+		"id": 296,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 500000,
+		"start": 70250000,
+		"end": 70750000
+	},
+	{
+		"name": "TAD_187",
+		"id": 297,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 375000,
+		"start": 69775000,
+		"end": 70150000
+	},
+	{
+		"name": "TAD_192",
+		"id": 298,
+		"chromosome": "chr1",
+		"parent": 286,
+		"value": 270000,
+		"start": 71260000,
+		"end": 71530000
+	},
+	{
+		"name": "TAD_191",
+		"id": 299,
+		"chromosome": "chr1",
+		"parent": 293,
+		"value": 400000,
+		"start": 71125000,
+		"end": 71525000
+	},
+	{
+		"name": "TAD_190",
+		"id": 300,
+		"chromosome": "chr1",
+		"parent": 293,
+		"value": 220000,
+		"start": 70780000,
+		"end": 71000000
+	},
+	{
+		"name": "TAD_197",
+		"id": 301,
+		"chromosome": "chr1",
+		"parent": 62,
+		"value": 990000,
+		"start": 72870000,
+		"end": 73860000
+	},
+	{
+		"name": "TAD_194",
+		"id": 302,
+		"chromosome": "chr1",
+		"parent": 62,
+		"value": 600000,
+		"start": 72250000,
+		"end": 72850000
+	},
+	{
+		"name": "TAD_200",
+		"id": 303,
+		"chromosome": "chr1",
+		"parent": 62,
+		"value": 280000,
+		"start": 73880000,
+		"end": 74160000
+	},
+	{
+		"name": "TAD_196",
+		"id": 304,
+		"chromosome": "chr1",
+		"parent": 62,
+		"value": 150000,
+		"start": 72710000,
+		"end": 72860000
+	},
+	{
+		"name": "TAD_199",
+		"id": 305,
+		"chromosome": "chr1",
+		"parent": 301,
+		"value": 550000,
+		"start": 73275000,
+		"end": 73825000
+	},
+	{
+		"name": "TAD_198",
+		"id": 306,
+		"chromosome": "chr1",
+		"parent": 301,
+		"value": 375000,
+		"start": 72875000,
+		"end": 73250000
+	},
+	{
+		"name": "TAD_203",
+		"id": 307,
+		"chromosome": "chr1",
+		"parent": 64,
+		"value": 850000,
+		"start": 74725000,
+		"end": 75575000
+	},
+	{
+		"name": "TAD_208",
+		"id": 308,
+		"chromosome": "chr1",
+		"parent": 66,
+		"value": 370000,
+		"start": 77550000,
+		"end": 77920000
+	},
+	{
+		"name": "TAD_206",
+		"id": 309,
+		"chromosome": "chr1",
+		"parent": 66,
+		"value": 290000,
+		"start": 75620000,
+		"end": 75910000
+	},
+	{
+		"name": "TAD_207",
+		"id": 310,
+		"chromosome": "chr1",
+		"parent": 66,
+		"value": 160000,
+		"start": 77350000,
+		"end": 77510000
+	},
+	{
+		"name": "TAD_210",
+		"id": 311,
+		"chromosome": "chr1",
+		"parent": 67,
+		"value": 230000,
+		"start": 77950000,
+		"end": 78180000
+	},
+	{
+		"name": "TAD_211",
+		"id": 312,
+		"chromosome": "chr1",
+		"parent": 67,
+		"value": 210000,
+		"start": 78200000,
+		"end": 78410000
+	},
+	{
+		"name": "TAD_218",
+		"id": 313,
+		"chromosome": "chr1",
+		"parent": 72,
+		"value": 1200000,
+		"start": 81300000,
+		"end": 82500000
+	},
+	{
+		"name": "TAD_216",
+		"id": 314,
+		"chromosome": "chr1",
+		"parent": 72,
+		"value": 490000,
+		"start": 80800000,
+		"end": 81290000
+	},
+	{
+		"name": "TAD_219",
+		"id": 315,
+		"chromosome": "chr1",
+		"parent": 313,
+		"value": 170000,
+		"start": 82300000,
+		"end": 82470000
+	},
+	{
+		"name": "TAD_222",
+		"id": 316,
+		"chromosome": "chr1",
+		"parent": 74,
+		"value": 140000,
+		"start": 82780000,
+		"end": 82920000
+	},
+	{
+		"name": "TAD_225",
+		"id": 317,
+		"chromosome": "chr1",
+		"parent": 75,
+		"value": 975000,
+		"start": 83700000,
+		"end": 84675000
+	},
+	{
+		"name": "TAD_224",
+		"id": 318,
+		"chromosome": "chr1",
+		"parent": 75,
+		"value": 535000,
+		"start": 83175000,
+		"end": 83710000
+	},
+	{
+		"name": "TAD_226",
+		"id": 319,
+		"chromosome": "chr1",
+		"parent": 317,
+		"value": 365000,
+		"start": 83725000,
+		"end": 84090000
+	},
+	{
+		"name": "TAD_227",
+		"id": 320,
+		"chromosome": "chr1",
+		"parent": 317,
+		"value": 170000,
+		"start": 84290000,
+		"end": 84460000
+	},
+	{
+		"name": "TAD_232",
+		"id": 321,
+		"chromosome": "chr1",
+		"parent": 79,
+		"value": 190000,
+		"start": 86150000,
+		"end": 86340000
+	},
+	{
+		"name": "TAD_238",
+		"id": 322,
+		"chromosome": "chr1",
+		"parent": 325,
+		"value": 620000,
+		"start": 87160000,
+		"end": 87780000
+	},
+	{
+		"name": "TAD_236",
+		"id": 323,
+		"chromosome": "chr1",
+		"parent": 325,
+		"value": 500000,
+		"start": 86600000,
+		"end": 87100000
+	},
+	{
+		"name": "TAD_255",
+		"id": 324,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 1475000,
+		"start": 91400000,
+		"end": 92875000
+	},
+	{
+		"name": "TAD_234",
+		"id": 325,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 1450000,
+		"start": 86500000,
+		"end": 87950000
+	},
+	{
+		"name": "TAD_242",
+		"id": 326,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 970000,
+		"start": 88300000,
+		"end": 89270000
+	},
+	{
+		"name": "TAD_250",
+		"id": 327,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 580000,
+		"start": 90010000,
+		"end": 90590000
+	},
+	{
+		"name": "TAD_253",
+		"id": 328,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 475000,
+		"start": 90900000,
+		"end": 91375000
+	},
+	{
+		"name": "TAD_248",
+		"id": 329,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 355000,
+		"start": 89625000,
+		"end": 89980000
+	},
+	{
+		"name": "TAD_247",
+		"id": 330,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 335000,
+		"start": 89275000,
+		"end": 89610000
+	},
+	{
+		"name": "TAD_252",
+		"id": 331,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 250000,
+		"start": 90630000,
+		"end": 90880000
+	},
+	{
+		"name": "TAD_260",
+		"id": 332,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 240000,
+		"start": 92650000,
+		"end": 92890000
+	},
+	{
+		"name": "TAD_240",
+		"id": 333,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 190000,
+		"start": 87790000,
+		"end": 87980000
+	},
+	{
+		"name": "TAD_241",
+		"id": 334,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 160000,
+		"start": 88020000,
+		"end": 88180000
+	},
+	{
+		"name": "TAD_262",
+		"id": 335,
+		"chromosome": "chr1",
+		"parent": 81,
+		"value": 160000,
+		"start": 92940000,
+		"end": 93100000
+	},
+	{
+		"name": "TAD_239",
+		"id": 336,
+		"chromosome": "chr1",
+		"parent": 322,
+		"value": 220000,
+		"start": 87440000,
+		"end": 87660000
+	},
+	{
+		"name": "TAD_237",
+		"id": 337,
+		"chromosome": "chr1",
+		"parent": 322,
+		"value": 210000,
+		"start": 87160000,
+		"end": 87370000
+	},
+	{
+		"name": "TAD_246",
+		"id": 338,
+		"chromosome": "chr1",
+		"parent": 326,
+		"value": 450000,
+		"start": 88750000,
+		"end": 89200000
+	},
+	{
+		"name": "TAD_243",
+		"id": 339,
+		"chromosome": "chr1",
+		"parent": 326,
+		"value": 400000,
+		"start": 88325000,
+		"end": 88725000
+	},
+	{
+		"name": "TAD_244",
+		"id": 340,
+		"chromosome": "chr1",
+		"parent": 339,
+		"value": 150000,
+		"start": 88560000,
+		"end": 88710000
+	},
+	{
+		"name": "TAD_245",
+		"id": 341,
+		"chromosome": "chr1",
+		"parent": 338,
+		"value": 190000,
+		"start": 88750000,
+		"end": 88940000
+	},
+	{
+		"name": "TAD_249",
+		"id": 342,
+		"chromosome": "chr1",
+		"parent": 329,
+		"value": 220000,
+		"start": 89760000,
+		"end": 89980000
+	},
+	{
+		"name": "TAD_251",
+		"id": 343,
+		"chromosome": "chr1",
+		"parent": 327,
+		"value": 230000,
+		"start": 90040000,
+		"end": 90270000
+	},
+	{
+		"name": "TAD_254",
+		"id": 344,
+		"chromosome": "chr1",
+		"parent": 328,
+		"value": 320000,
+		"start": 90920000,
+		"end": 91240000
+	},
+	{
+		"name": "TAD_257",
+		"id": 345,
+		"chromosome": "chr1",
+		"parent": 324,
+		"value": 510000,
+		"start": 91950000,
+		"end": 92460000
+	},
+	{
+		"name": "TAD_256",
+		"id": 346,
+		"chromosome": "chr1",
+		"parent": 324,
+		"value": 375000,
+		"start": 91500000,
+		"end": 91875000
+	},
+	{
+		"name": "TAD_259",
+		"id": 347,
+		"chromosome": "chr1",
+		"parent": 324,
+		"value": 150000,
+		"start": 92480000,
+		"end": 92630000
+	},
+	{
+		"name": "TAD_258",
+		"id": 348,
+		"chromosome": "chr1",
+		"parent": 345,
+		"value": 260000,
+		"start": 92180000,
+		"end": 92440000
+	},
+	{
+		"name": "TAD_263",
+		"id": 349,
+		"chromosome": "chr1",
+		"parent": 82,
+		"value": 325000,
+		"start": 93125000,
+		"end": 93450000
+	},
+	{
+		"name": "TAD_264",
+		"id": 350,
+		"chromosome": "chr1",
+		"parent": 82,
+		"value": 240000,
+		"start": 93510000,
+		"end": 93750000
+	},
+	{
+		"name": "TAD_266",
+		"id": 351,
+		"chromosome": "chr1",
+		"parent": 83,
+		"value": 1900000,
+		"start": 94075000,
+		"end": 95975000
+	},
+	{
+		"name": "TAD_269",
+		"id": 352,
+		"chromosome": "chr1",
+		"parent": 83,
+		"value": 825000,
+		"start": 95975000,
+		"end": 96800000
+	},
+	{
+		"name": "TAD_271",
+		"id": 353,
+		"chromosome": "chr1",
+		"parent": 83,
+		"value": 190000,
+		"start": 96830000,
+		"end": 97020000
+	},
+	{
+		"name": "TAD_267",
+		"id": 354,
+		"chromosome": "chr1",
+		"parent": 351,
+		"value": 525000,
+		"start": 94100000,
+		"end": 94625000
+	},
+	{
+		"name": "TAD_268",
+		"id": 355,
+		"chromosome": "chr1",
+		"parent": 351,
+		"value": 475000,
+		"start": 95350000,
+		"end": 95825000
+	},
+	{
+		"name": "TAD_270",
+		"id": 356,
+		"chromosome": "chr1",
+		"parent": 352,
+		"value": 500000,
+		"start": 96300000,
+		"end": 96800000
+	},
+	{
+		"name": "TAD_277",
+		"id": 357,
+		"chromosome": "chr1",
+		"parent": 86,
+		"value": 3300000,
+		"start": 100450000,
+		"end": 103750000
+	},
+	{
+		"name": "TAD_287",
+		"id": 358,
+		"chromosome": "chr1",
+		"parent": 86,
+		"value": 1850000,
+		"start": 103800000,
+		"end": 105650000
+	},
+	{
+		"name": "TAD_284",
+		"id": 359,
+		"chromosome": "chr1",
+		"parent": 86,
+		"value": 1175000,
+		"start": 102600000,
+		"end": 103775000
+	},
+	{
+		"name": "TAD_275",
+		"id": 360,
+		"chromosome": "chr1",
+		"parent": 86,
+		"value": 1150000,
+		"start": 98550000,
+		"end": 99700000
+	},
+	{
+		"name": "TAD_276",
+		"id": 361,
+		"chromosome": "chr1",
+		"parent": 86,
+		"value": 720000,
+		"start": 99750000,
+		"end": 100470000
+	},
+	{
+		"name": "TAD_279",
+		"id": 362,
+		"chromosome": "chr1",
+		"parent": 357,
+		"value": 2150000,
+		"start": 100500000,
+		"end": 102650000
+	},
+	{
+		"name": "TAD_280",
+		"id": 363,
+		"chromosome": "chr1",
+		"parent": 365,
+		"value": 475000,
+		"start": 100550000,
+		"end": 101025000
+	},
+	{
+		"name": "TAD_281",
+		"id": 364,
+		"chromosome": "chr1",
+		"parent": 362,
+		"value": 1020000,
+		"start": 101400000,
+		"end": 102420000
+	},
+	{
+		"name": "TAD_278",
+		"id": 365,
+		"chromosome": "chr1",
+		"parent": 362,
+		"value": 775000,
+		"start": 100500000,
+		"end": 101275000
+	},
+	{
+		"name": "TAD_282",
+		"id": 366,
+		"chromosome": "chr1",
+		"parent": 364,
+		"value": 550000,
+		"start": 101525000,
+		"end": 102075000
+	},
+	{
+		"name": "TAD_283",
+		"id": 367,
+		"chromosome": "chr1",
+		"parent": 364,
+		"value": 250000,
+		"start": 102130000,
+		"end": 102380000
+	},
+	{
+		"name": "TAD_285",
+		"id": 368,
+		"chromosome": "chr1",
+		"parent": 359,
+		"value": 600000,
+		"start": 103175000,
+		"end": 103775000
+	},
+	{
+		"name": "TAD_288",
+		"id": 369,
+		"chromosome": "chr1",
+		"parent": 370,
+		"value": 400000,
+		"start": 104075000,
+		"end": 104475000
+	},
+	{
+		"name": "TAD_286",
+		"id": 370,
+		"chromosome": "chr1",
+		"parent": 358,
+		"value": 1140000,
+		"start": 103800000,
+		"end": 104940000
+	},
+	{
+		"name": "TAD_289",
+		"id": 371,
+		"chromosome": "chr1",
+		"parent": 358,
+		"value": 700000,
+		"start": 104950000,
+		"end": 105650000
+	},
+	{
+		"name": "TAD_293",
+		"id": 372,
+		"chromosome": "chr1",
+		"parent": 373,
+		"value": 340000,
+		"start": 106050000,
+		"end": 106390000
+	},
+	{
+		"name": "TAD_291",
+		"id": 373,
+		"chromosome": "chr1",
+		"parent": 88,
+		"value": 600000,
+		"start": 105800000,
+		"end": 106400000
+	},
+	{
+		"name": "TAD_294",
+		"id": 374,
+		"chromosome": "chr1",
+		"parent": 88,
+		"value": 405000,
+		"start": 106420000,
+		"end": 106825000
+	},
+	{
+		"name": "TAD_300",
+		"id": 375,
+		"chromosome": "chr1",
+		"parent": 89,
+		"value": 1550000,
+		"start": 110050000,
+		"end": 111600000
+	},
+	{
+		"name": "TAD_297",
+		"id": 376,
+		"chromosome": "chr1",
+		"parent": 89,
+		"value": 1250000,
+		"start": 107590000,
+		"end": 108840000
+	},
+	{
+		"name": "TAD_299",
+		"id": 377,
+		"chromosome": "chr1",
+		"parent": 89,
+		"value": 1125000,
+		"start": 108875000,
+		"end": 110000000
+	},
+	{
+		"name": "TAD_295",
+		"id": 378,
+		"chromosome": "chr1",
+		"parent": 89,
+		"value": 650000,
+		"start": 106900000,
+		"end": 107550000
+	},
+	{
+		"name": "TAD_298",
+		"id": 379,
+		"chromosome": "chr1",
+		"parent": 376,
+		"value": 475000,
+		"start": 107625000,
+		"end": 108100000
+	},
+	{
+		"name": "TAD_302",
+		"id": 380,
+		"chromosome": "chr1",
+		"parent": 91,
+		"value": 190000,
+		"start": 111650000,
+		"end": 111840000
+	},
+	{
+		"name": "TAD_307",
+		"id": 381,
+		"chromosome": "chr1",
+		"parent": 384,
+		"value": 800000,
+		"start": 113500000,
+		"end": 114300000
+	},
+	{
+		"name": "TAD_304",
+		"id": 382,
+		"chromosome": "chr1",
+		"parent": 384,
+		"value": 750000,
+		"start": 112450000,
+		"end": 113200000
+	},
+	{
+		"name": "TAD_309",
+		"id": 383,
+		"chromosome": "chr1",
+		"parent": 384,
+		"value": 600000,
+		"start": 114375000,
+		"end": 114975000
+	},
+	{
+		"name": "TAD_305",
+		"id": 384,
+		"chromosome": "chr1",
+		"parent": 92,
+		"value": 2600000,
+		"start": 112450000,
+		"end": 115050000
+	},
+	{
+		"name": "TAD_312",
+		"id": 385,
+		"chromosome": "chr1",
+		"parent": 92,
+		"value": 1650000,
+		"start": 116600000,
+		"end": 118250000
+	},
+	{
+		"name": "TAD_310",
+		"id": 386,
+		"chromosome": "chr1",
+		"parent": 92,
+		"value": 1275000,
+		"start": 115225000,
+		"end": 116500000
+	},
+	{
+		"name": "TAD_308",
+		"id": 387,
+		"chromosome": "chr1",
+		"parent": 381,
+		"value": 400000,
+		"start": 113775000,
+		"end": 114175000
+	},
+	{
+		"name": "TAD_311",
+		"id": 388,
+		"chromosome": "chr1",
+		"parent": 386,
+		"value": 825000,
+		"start": 115650000,
+		"end": 116475000
+	},
+	{
+		"name": "TAD_313",
+		"id": 389,
+		"chromosome": "chr1",
+		"parent": 385,
+		"value": 875000,
+		"start": 116650000,
+		"end": 117525000
+	},
+	{
+		"name": "TAD_314",
+		"id": 390,
+		"chromosome": "chr1",
+		"parent": 389,
+		"value": 500000,
+		"start": 117025000,
+		"end": 117525000
+	},
+	{
+		"name": "TAD_315",
+		"id": 391,
+		"chromosome": "chr1",
+		"parent": 390,
+		"value": 160000,
+		"start": 117180000,
+		"end": 117340000
+	},
+	{
+		"name": "TAD_322",
+		"id": 392,
+		"chromosome": "chr1",
+		"parent": 96,
+		"value": 425000,
+		"start": 119075000,
+		"end": 119500000
+	},
+	{
+		"name": "TAD_321",
+		"id": 393,
+		"chromosome": "chr1",
+		"parent": 96,
+		"value": 260000,
+		"start": 118820000,
+		"end": 119080000
+	},
+	{
+		"name": "TAD_320",
+		"id": 394,
+		"chromosome": "chr1",
+		"parent": 96,
+		"value": 230000,
+		"start": 118540000,
+		"end": 118770000
+	},
+	{
+		"name": "TAD_325",
+		"id": 395,
+		"chromosome": "chr1",
+		"parent": 96,
+		"value": 150000,
+		"start": 119530000,
+		"end": 119680000
+	},
+	{
+		"name": "TAD_323",
+		"id": 396,
+		"chromosome": "chr1",
+		"parent": 392,
+		"value": 160000,
+		"start": 119300000,
+		"end": 119460000
+	},
+	{
+		"name": "TAD_330",
+		"id": 397,
+		"chromosome": "chr1",
+		"parent": 400,
+		"value": 200000,
+		"start": 120350000,
+		"end": 120550000
+	},
+	{
+		"name": "TAD_329",
+		"id": 398,
+		"chromosome": "chr1",
+		"parent": 400,
+		"value": 150000,
+		"start": 120180000,
+		"end": 120330000
+	},
+	{
+		"name": "TAD_331",
+		"id": 399,
+		"chromosome": "chr1",
+		"parent": 99,
+		"value": 620000,
+		"start": 120600000,
+		"end": 121220000
+	},
+	{
+		"name": "TAD_327",
+		"id": 400,
+		"chromosome": "chr1",
+		"parent": 99,
+		"value": 410000,
+		"start": 120150000,
+		"end": 120560000
+	},
+	{
+		"name": "TAD_332",
+		"id": 401,
+		"chromosome": "chr1",
+		"parent": 99,
+		"value": 180000,
+		"start": 121230000,
+		"end": 121410000
+	},
+	{
+		"name": "TAD_334",
+		"id": 402,
+		"chromosome": "chr1",
+		"parent": 100,
+		"value": 120000,
+		"start": 121430000,
+		"end": 121550000
+	},
+	{
+		"name": "TAD_339",
+		"id": 403,
+		"chromosome": "chr1",
+		"parent": 101,
+		"value": 1175000,
+		"start": 122925000,
+		"end": 124100000
+	},
+	{
+		"name": "TAD_336",
+		"id": 404,
+		"chromosome": "chr1",
+		"parent": 101,
+		"value": 1100000,
+		"start": 121800000,
+		"end": 122900000
+	},
+	{
+		"name": "TAD_337",
+		"id": 405,
+		"chromosome": "chr1",
+		"parent": 101,
+		"value": 510000,
+		"start": 122400000,
+		"end": 122910000
+	},
+	{
+		"name": "TAD_338",
+		"id": 406,
+		"chromosome": "chr1",
+		"parent": 404,
+		"value": 190000,
+		"start": 122450000,
+		"end": 122640000
+	},
+	{
+		"name": "TAD_341",
+		"id": 407,
+		"chromosome": "chr1",
+		"parent": 403,
+		"value": 700000,
+		"start": 123350000,
+		"end": 124050000
+	},
+	{
+		"name": "TAD_340",
+		"id": 408,
+		"chromosome": "chr1",
+		"parent": 403,
+		"value": 220000,
+		"start": 122960000,
+		"end": 123180000
+	},
+	{
+		"name": "TAD_346",
+		"id": 409,
+		"chromosome": "chr1",
+		"parent": 103,
+		"value": 1525000,
+		"start": 125450000,
+		"end": 126975000
+	},
+	{
+		"name": "TAD_343",
+		"id": 410,
+		"chromosome": "chr1",
+		"parent": 103,
+		"value": 650000,
+		"start": 124700000,
+		"end": 125350000
+	},
+	{
+		"name": "TAD_350",
+		"id": 411,
+		"chromosome": "chr1",
+		"parent": 103,
+		"value": 470000,
+		"start": 127000000,
+		"end": 127470000
+	},
+	{
+		"name": "TAD_345",
+		"id": 412,
+		"chromosome": "chr1",
+		"parent": 103,
+		"value": 210000,
+		"start": 125380000,
+		"end": 125590000
+	},
+	{
+		"name": "TAD_347",
+		"id": 413,
+		"chromosome": "chr1",
+		"parent": 409,
+		"value": 900000,
+		"start": 125550000,
+		"end": 126450000
+	},
+	{
+		"name": "TAD_348",
+		"id": 414,
+		"chromosome": "chr1",
+		"parent": 409,
+		"value": 470000,
+		"start": 126490000,
+		"end": 126960000
+	},
+	{
+		"name": "TAD_351",
+		"id": 415,
+		"chromosome": "chr1",
+		"parent": 411,
+		"value": 160000,
+		"start": 127260000,
+		"end": 127420000
+	},
+	{
+		"name": "TAD_357",
+		"id": 416,
+		"chromosome": "chr1",
+		"parent": 108,
+		"value": 1575000,
+		"start": 128850000,
+		"end": 130425000
+	},
+	{
+		"name": "TAD_362",
+		"id": 417,
+		"chromosome": "chr1",
+		"parent": 108,
+		"value": 220000,
+		"start": 130830000,
+		"end": 131050000
+	},
+	{
+		"name": "TAD_358",
+		"id": 418,
+		"chromosome": "chr1",
+		"parent": 416,
+		"value": 940000,
+		"start": 129450000,
+		"end": 130390000
+	},
+	{
+		"name": "TAD_356",
+		"id": 419,
+		"chromosome": "chr1",
+		"parent": 416,
+		"value": 425000,
+		"start": 128850000,
+		"end": 129275000
+	},
+	{
+		"name": "TAD_359",
+		"id": 420,
+		"chromosome": "chr1",
+		"parent": 418,
+		"value": 550000,
+		"start": 129825000,
+		"end": 130375000
+	},
+	{
+		"name": "TAD_360",
+		"id": 421,
+		"chromosome": "chr1",
+		"parent": 109,
+		"value": 575000,
+		"start": 130500000,
+		"end": 131075000
+	},
+	{
+		"name": "TAD_365",
+		"id": 422,
+		"chromosome": "chr1",
+		"parent": 109,
+		"value": 250000,
+		"start": 131310000,
+		"end": 131560000
+	},
+	{
+		"name": "TAD_363",
+		"id": 423,
+		"chromosome": "chr1",
+		"parent": 109,
+		"value": 180000,
+		"start": 131090000,
+		"end": 131270000
+	},
+	{
+		"name": "TAD_378",
+		"id": 424,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 645000,
+		"start": 133675000,
+		"end": 134320000
+	},
+	{
+		"name": "TAD_368",
+		"id": 425,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 545000,
+		"start": 131925000,
+		"end": 132470000
+	},
+	{
+		"name": "TAD_374",
+		"id": 426,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 505000,
+		"start": 133125000,
+		"end": 133630000
+	},
+	{
+		"name": "TAD_371",
+		"id": 427,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 470000,
+		"start": 132520000,
+		"end": 132990000
+	},
+	{
+		"name": "TAD_383",
+		"id": 428,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 450000,
+		"start": 134625000,
+		"end": 135075000
+	},
+	{
+		"name": "TAD_382",
+		"id": 429,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 280000,
+		"start": 134340000,
+		"end": 134620000
+	},
+	{
+		"name": "TAD_387",
+		"id": 430,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 260000,
+		"start": 135440000,
+		"end": 135700000
+	},
+	{
+		"name": "TAD_386",
+		"id": 431,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 240000,
+		"start": 135140000,
+		"end": 135380000
+	},
+	{
+		"name": "TAD_385",
+		"id": 432,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 160000,
+		"start": 134960000,
+		"end": 135120000
+	},
+	{
+		"name": "TAD_373",
+		"id": 433,
+		"chromosome": "chr1",
+		"parent": 112,
+		"value": 130000,
+		"start": 133000000,
+		"end": 133130000
+	},
+	{
+		"name": "TAD_370",
+		"id": 434,
+		"chromosome": "chr1",
+		"parent": 425,
+		"value": 200000,
+		"start": 132150000,
+		"end": 132350000
+	},
+	{
+		"name": "TAD_369",
+		"id": 435,
+		"chromosome": "chr1",
+		"parent": 425,
+		"value": 160000,
+		"start": 131960000,
+		"end": 132120000
+	},
+	{
+		"name": "TAD_372",
+		"id": 436,
+		"chromosome": "chr1",
+		"parent": 427,
+		"value": 220000,
+		"start": 132750000,
+		"end": 132970000
+	},
+	{
+		"name": "TAD_376",
+		"id": 437,
+		"chromosome": "chr1",
+		"parent": 426,
+		"value": 230000,
+		"start": 133370000,
+		"end": 133600000
+	},
+	{
+		"name": "TAD_375",
+		"id": 438,
+		"chromosome": "chr1",
+		"parent": 426,
+		"value": 210000,
+		"start": 133140000,
+		"end": 133350000
+	},
+	{
+		"name": "TAD_379",
+		"id": 439,
+		"chromosome": "chr1",
+		"parent": 441,
+		"value": 170000,
+		"start": 133720000,
+		"end": 133890000
+	},
+	{
+		"name": "TAD_380",
+		"id": 440,
+		"chromosome": "chr1",
+		"parent": 441,
+		"value": 150000,
+		"start": 133900000,
+		"end": 134050000
+	},
+	{
+		"name": "TAD_377",
+		"id": 441,
+		"chromosome": "chr1",
+		"parent": 424,
+		"value": 375000,
+		"start": 133675000,
+		"end": 134050000
+	},
+	{
+		"name": "TAD_381",
+		"id": 442,
+		"chromosome": "chr1",
+		"parent": 424,
+		"value": 210000,
+		"start": 134110000,
+		"end": 134320000
+	},
+	{
+		"name": "TAD_384",
+		"id": 443,
+		"chromosome": "chr1",
+		"parent": 428,
+		"value": 300000,
+		"start": 134640000,
+		"end": 134940000
+	},
+	{
+		"name": "TAD_389",
+		"id": 444,
+		"chromosome": "chr1",
+		"parent": 113,
+		"value": 380000,
+		"start": 136090000,
+		"end": 136470000
+	},
+	{
+		"name": "TAD_391",
+		"id": 445,
+		"chromosome": "chr1",
+		"parent": 114,
+		"value": 220000,
+		"start": 136530000,
+		"end": 136750000
+	},
+	{
+		"name": "TAD_396",
+		"id": 446,
+		"chromosome": "chr1",
+		"parent": 115,
+		"value": 1250000,
+		"start": 138100000,
+		"end": 139350000
+	},
+	{
+		"name": "TAD_394",
+		"id": 447,
+		"chromosome": "chr1",
+		"parent": 115,
+		"value": 845000,
+		"start": 137225000,
+		"end": 138070000
+	},
+	{
+		"name": "TAD_392",
+		"id": 448,
+		"chromosome": "chr1",
+		"parent": 115,
+		"value": 460000,
+		"start": 136750000,
+		"end": 137210000
+	},
+	{
+		"name": "TAD_398",
+		"id": 449,
+		"chromosome": "chr1",
+		"parent": 451,
+		"value": 450000,
+		"start": 138320000,
+		"end": 138770000
+	},
+	{
+		"name": "TAD_397",
+		"id": 450,
+		"chromosome": "chr1",
+		"parent": 451,
+		"value": 190000,
+		"start": 138110000,
+		"end": 138300000
+	},
+	{
+		"name": "TAD_395",
+		"id": 451,
+		"chromosome": "chr1",
+		"parent": 446,
+		"value": 680000,
+		"start": 138100000,
+		"end": 138780000
+	},
+	{
+		"name": "TAD_399",
+		"id": 452,
+		"chromosome": "chr1",
+		"parent": 446,
+		"value": 475000,
+		"start": 138800000,
+		"end": 139275000
+	},
+	{
+		"name": "TAD_401",
+		"id": 453,
+		"chromosome": "chr1",
+		"parent": 116,
+		"value": 525000,
+		"start": 139475000,
+		"end": 140000000
+	},
+	{
+		"name": "TAD_405",
+		"id": 454,
+		"chromosome": "chr1",
+		"parent": 117,
+		"value": 2700000,
+		"start": 140675000,
+		"end": 143375000
+	},
+	{
+		"name": "TAD_410",
+		"id": 455,
+		"chromosome": "chr1",
+		"parent": 117,
+		"value": 825000,
+		"start": 142800000,
+		"end": 143625000
+	},
+	{
+		"name": "TAD_403",
+		"id": 456,
+		"chromosome": "chr1",
+		"parent": 117,
+		"value": 525000,
+		"start": 140125000,
+		"end": 140650000
+	},
+	{
+		"name": "TAD_404",
+		"id": 457,
+		"chromosome": "chr1",
+		"parent": 456,
+		"value": 180000,
+		"start": 140350000,
+		"end": 140530000
+	},
+	{
+		"name": "TAD_406",
+		"id": 458,
+		"chromosome": "chr1",
+		"parent": 454,
+		"value": 1250000,
+		"start": 140700000,
+		"end": 141950000
+	},
+	{
+		"name": "TAD_409",
+		"id": 459,
+		"chromosome": "chr1",
+		"parent": 454,
+		"value": 750000,
+		"start": 142000000,
+		"end": 142750000
+	},
+	{
+		"name": "TAD_407",
+		"id": 460,
+		"chromosome": "chr1",
+		"parent": 458,
+		"value": 550000,
+		"start": 140875000,
+		"end": 141425000
+	},
+	{
+		"name": "TAD_408",
+		"id": 461,
+		"chromosome": "chr1",
+		"parent": 458,
+		"value": 425000,
+		"start": 141500000,
+		"end": 141925000
+	},
+	{
+		"name": "TAD_413",
+		"id": 462,
+		"chromosome": "chr1",
+		"parent": 119,
+		"value": 340000,
+		"start": 143790000,
+		"end": 144130000
+	},
+	{
+		"name": "TAD_414",
+		"id": 463,
+		"chromosome": "chr1",
+		"parent": 119,
+		"value": 200000,
+		"start": 144180000,
+		"end": 144380000
+	},
+	{
+		"name": "TAD_419",
+		"id": 464,
+		"chromosome": "chr1",
+		"parent": 120,
+		"value": 2575000,
+		"start": 147225000,
+		"end": 149800000
+	},
+	{
+		"name": "TAD_416",
+		"id": 465,
+		"chromosome": "chr1",
+		"parent": 120,
+		"value": 2400000,
+		"start": 144350000,
+		"end": 146750000
+	},
+	{
+		"name": "TAD_417",
+		"id": 466,
+		"chromosome": "chr1",
+		"parent": 465,
+		"value": 1450000,
+		"start": 144400000,
+		"end": 145850000
+	},
+	{
+		"name": "TAD_418",
+		"id": 467,
+		"chromosome": "chr1",
+		"parent": 465,
+		"value": 350000,
+		"start": 146150000,
+		"end": 146500000
+	},
+	{
+		"name": "TAD_420",
+		"id": 468,
+		"chromosome": "chr1",
+		"parent": 464,
+		"value": 700000,
+		"start": 147250000,
+		"end": 147950000
+	},
+	{
+		"name": "TAD_421",
+		"id": 469,
+		"chromosome": "chr1",
+		"parent": 464,
+		"value": 450000,
+		"start": 149300000,
+		"end": 149750000
+	},
+	{
+		"name": "TAD_424",
+		"id": 470,
+		"chromosome": "chr1",
+		"parent": 122,
+		"value": 500000,
+		"start": 150510000,
+		"end": 151010000
+	},
+	{
+		"name": "TAD_428",
+		"id": 471,
+		"chromosome": "chr1",
+		"parent": 124,
+		"value": 975000,
+		"start": 151425000,
+		"end": 152400000
+	},
+	{
+		"name": "TAD_432",
+		"id": 472,
+		"chromosome": "chr1",
+		"parent": 124,
+		"value": 750000,
+		"start": 152700000,
+		"end": 153450000
+	},
+	{
+		"name": "TAD_429",
+		"id": 473,
+		"chromosome": "chr1",
+		"parent": 124,
+		"value": 700000,
+		"start": 151750000,
+		"end": 152450000
+	},
+	{
+		"name": "TAD_430",
+		"id": 474,
+		"chromosome": "chr1",
+		"parent": 124,
+		"value": 350000,
+		"start": 152400000,
+		"end": 152750000
+	},
+	{
+		"name": "TAD_427",
+		"id": 475,
+		"chromosome": "chr1",
+		"parent": 471,
+		"value": 350000,
+		"start": 151425000,
+		"end": 151775000
+	},
+	{
+		"name": "TAD_431",
+		"id": 476,
+		"chromosome": "chr1",
+		"parent": 474,
+		"value": 240000,
+		"start": 152510000,
+		"end": 152750000
+	},
+	{
+		"name": "TAD_434",
+		"id": 477,
+		"chromosome": "chr1",
+		"parent": 472,
+		"value": 330000,
+		"start": 153100000,
+		"end": 153430000
+	},
+	{
+		"name": "TAD_433",
+		"id": 478,
+		"chromosome": "chr1",
+		"parent": 472,
+		"value": 320000,
+		"start": 152770000,
+		"end": 153090000
+	},
+	{
+		"name": "TAD_438",
+		"id": 479,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 1450000,
+		"start": 153775000,
+		"end": 155225000
+	},
+	{
+		"name": "TAD_437",
+		"id": 480,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 660000,
+		"start": 153540000,
+		"end": 154200000
+	},
+	{
+		"name": "TAD_435",
+		"id": 481,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 300000,
+		"start": 153500000,
+		"end": 153800000
+	},
+	{
+		"name": "TAD_444",
+		"id": 482,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 260000,
+		"start": 155280000,
+		"end": 155540000
+	},
+	{
+		"name": "TAD_443",
+		"id": 483,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 220000,
+		"start": 155020000,
+		"end": 155240000
+	},
+	{
+		"name": "TAD_446",
+		"id": 484,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 200000,
+		"start": 155790000,
+		"end": 155990000
+	},
+	{
+		"name": "TAD_445",
+		"id": 485,
+		"chromosome": "chr1",
+		"parent": 125,
+		"value": 160000,
+		"start": 155570000,
+		"end": 155730000
+	},
+	{
+		"name": "TAD_440",
+		"id": 486,
+		"chromosome": "chr1",
+		"parent": 479,
+		"value": 800000,
+		"start": 154200000,
+		"end": 155000000
+	},
+	{
+		"name": "TAD_439",
+		"id": 487,
+		"chromosome": "chr1",
+		"parent": 479,
+		"value": 375000,
+		"start": 153825000,
+		"end": 154200000
+	},
+	{
+		"name": "TAD_441",
+		"id": 488,
+		"chromosome": "chr1",
+		"parent": 486,
+		"value": 505000,
+		"start": 154225000,
+		"end": 154730000
+	},
+	{
+		"name": "TAD_442",
+		"id": 489,
+		"chromosome": "chr1",
+		"parent": 486,
+		"value": 230000,
+		"start": 154770000,
+		"end": 155000000
+	},
+	{
+		"name": "TAD_451",
+		"id": 490,
+		"chromosome": "chr1",
+		"parent": 492,
+		"value": 170000,
+		"start": 156910000,
+		"end": 157080000
+	},
+	{
+		"name": "TAD_450",
+		"id": 491,
+		"chromosome": "chr1",
+		"parent": 492,
+		"value": 160000,
+		"start": 156730000,
+		"end": 156890000
+	},
+	{
+		"name": "TAD_448",
+		"id": 492,
+		"chromosome": "chr1",
+		"parent": 127,
+		"value": 400000,
+		"start": 156700000,
+		"end": 157100000
+	},
+	{
+		"name": "TAD_453",
+		"id": 493,
+		"chromosome": "chr1",
+		"parent": 127,
+		"value": 180000,
+		"start": 157290000,
+		"end": 157470000
+	},
+	{
+		"name": "TAD_455",
+		"id": 494,
+		"chromosome": "chr1",
+		"parent": 129,
+		"value": 1700000,
+		"start": 157500000,
+		"end": 159200000
+	},
+	{
+		"name": "TAD_459",
+		"id": 495,
+		"chromosome": "chr1",
+		"parent": 129,
+		"value": 920000,
+		"start": 159250000,
+		"end": 160170000
+	},
+	{
+		"name": "TAD_456",
+		"id": 496,
+		"chromosome": "chr1",
+		"parent": 494,
+		"value": 1120000,
+		"start": 157540000,
+		"end": 158660000
+	},
+	{
+		"name": "TAD_458",
+		"id": 497,
+		"chromosome": "chr1",
+		"parent": 494,
+		"value": 505000,
+		"start": 158670000,
+		"end": 159175000
+	},
+	{
+		"name": "TAD_457",
+		"id": 498,
+		"chromosome": "chr1",
+		"parent": 496,
+		"value": 450000,
+		"start": 157575000,
+		"end": 158025000
+	},
+	{
+		"name": "TAD_460",
+		"id": 499,
+		"chromosome": "chr1",
+		"parent": 495,
+		"value": 170000,
+		"start": 159900000,
+		"end": 160070000
+	},
+	{
+		"name": "TAD_463",
+		"id": 500,
+		"chromosome": "chr1",
+		"parent": 130,
+		"value": 460000,
+		"start": 160270000,
+		"end": 160730000
+	},
+	{
+		"name": "TAD_465",
+		"id": 501,
+		"chromosome": "chr1",
+		"parent": 130,
+		"value": 180000,
+		"start": 160740000,
+		"end": 160920000
+	},
+	{
+		"name": "TAD_462",
+		"id": 502,
+		"chromosome": "chr1",
+		"parent": 130,
+		"value": 150000,
+		"start": 160220000,
+		"end": 160370000
+	},
+	{
+		"name": "TAD_464",
+		"id": 503,
+		"chromosome": "chr1",
+		"parent": 500,
+		"value": 180000,
+		"start": 160540000,
+		"end": 160720000
+	},
+	{
+		"name": "TAD_470",
+		"id": 504,
+		"chromosome": "chr1",
+		"parent": 132,
+		"value": 525000,
+		"start": 161975000,
+		"end": 162500000
+	},
+	{
+		"name": "TAD_468",
+		"id": 505,
+		"chromosome": "chr1",
+		"parent": 132,
+		"value": 420000,
+		"start": 161300000,
+		"end": 161720000
+	},
+	{
+		"name": "TAD_469",
+		"id": 506,
+		"chromosome": "chr1",
+		"parent": 132,
+		"value": 230000,
+		"start": 161740000,
+		"end": 161970000
+	},
+	{
+		"name": "TAD_471",
+		"id": 507,
+		"chromosome": "chr1",
+		"parent": 504,
+		"value": 350000,
+		"start": 161980000,
+		"end": 162330000
+	},
+	{
+		"name": "TAD_475",
+		"id": 508,
+		"chromosome": "chr1",
+		"parent": 135,
+		"value": 180000,
+		"start": 163150000,
+		"end": 163330000
+	},
+	{
+		"name": "TAD_478",
+		"id": 509,
+		"chromosome": "chr1",
+		"parent": 137,
+		"value": 375000,
+		"start": 164750000,
+		"end": 165125000
+	},
+	{
+		"name": "TAD_482",
+		"id": 510,
+		"chromosome": "chr1",
+		"parent": 140,
+		"value": 630000,
+		"start": 165750000,
+		"end": 166380000
+	},
+	{
+		"name": "TAD_484",
+		"id": 511,
+		"chromosome": "chr1",
+		"parent": 510,
+		"value": 210000,
+		"start": 166160000,
+		"end": 166370000
+	},
+	{
+		"name": "TAD_483",
+		"id": 512,
+		"chromosome": "chr1",
+		"parent": 510,
+		"value": 150000,
+		"start": 166000000,
+		"end": 166150000
+	},
+	{
+		"name": "TAD_491",
+		"id": 513,
+		"chromosome": "chr1",
+		"parent": 141,
+		"value": 3025000,
+		"start": 167700000,
+		"end": 170725000
+	},
+	{
+		"name": "TAD_486",
+		"id": 514,
+		"chromosome": "chr1",
+		"parent": 141,
+		"value": 810000,
+		"start": 166400000,
+		"end": 167210000
+	},
+	{
+		"name": "TAD_489",
+		"id": 515,
+		"chromosome": "chr1",
+		"parent": 141,
+		"value": 240000,
+		"start": 167400000,
+		"end": 167640000
+	},
+	{
+		"name": "TAD_490",
+		"id": 516,
+		"chromosome": "chr1",
+		"parent": 141,
+		"value": 240000,
+		"start": 167680000,
+		"end": 167920000
+	},
+	{
+		"name": "TAD_488",
+		"id": 517,
+		"chromosome": "chr1",
+		"parent": 141,
+		"value": 150000,
+		"start": 167210000,
+		"end": 167360000
+	},
+	{
+		"name": "TAD_487",
+		"id": 518,
+		"chromosome": "chr1",
+		"parent": 514,
+		"value": 450000,
+		"start": 166750000,
+		"end": 167200000
+	},
+	{
+		"name": "TAD_492",
+		"id": 519,
+		"chromosome": "chr1",
+		"parent": 513,
+		"value": 1580000,
+		"start": 167900000,
+		"end": 169480000
+	},
+	{
+		"name": "TAD_496",
+		"id": 520,
+		"chromosome": "chr1",
+		"parent": 513,
+		"value": 500000,
+		"start": 170200000,
+		"end": 170700000
+	},
+	{
+		"name": "TAD_494",
+		"id": 521,
+		"chromosome": "chr1",
+		"parent": 513,
+		"value": 395000,
+		"start": 169525000,
+		"end": 169920000
+	},
+	{
+		"name": "TAD_495",
+		"id": 522,
+		"chromosome": "chr1",
+		"parent": 513,
+		"value": 190000,
+		"start": 169950000,
+		"end": 170140000
+	},
+	{
+		"name": "TAD_493",
+		"id": 523,
+		"chromosome": "chr1",
+		"parent": 519,
+		"value": 500000,
+		"start": 168950000,
+		"end": 169450000
+	},
+	{
+		"name": "TAD_497",
+		"id": 524,
+		"chromosome": "chr1",
+		"parent": 520,
+		"value": 340000,
+		"start": 170270000,
+		"end": 170610000
+	},
+	{
+		"name": "TAD_502",
+		"id": 525,
+		"chromosome": "chr1",
+		"parent": 144,
+		"value": 200000,
+		"start": 171300000,
+		"end": 171500000
+	},
+	{
+		"name": "TAD_501",
+		"id": 526,
+		"chromosome": "chr1",
+		"parent": 144,
+		"value": 160000,
+		"start": 171100000,
+		"end": 171260000
+	},
+	{
+		"name": "TAD_517",
+		"id": 527,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 1850000,
+		"start": 175900000,
+		"end": 177750000
+	},
+	{
+		"name": "TAD_514",
+		"id": 528,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 1370000,
+		"start": 174500000,
+		"end": 175870000
+	},
+	{
+		"name": "TAD_509",
+		"id": 529,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 1000000,
+		"start": 173400000,
+		"end": 174400000
+	},
+	{
+		"name": "TAD_508",
+		"id": 530,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 860000,
+		"start": 172550000,
+		"end": 173410000
+	},
+	{
+		"name": "TAD_504",
+		"id": 531,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 480000,
+		"start": 171520000,
+		"end": 172000000
+	},
+	{
+		"name": "TAD_506",
+		"id": 532,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 340000,
+		"start": 172020000,
+		"end": 172360000
+	},
+	{
+		"name": "TAD_513",
+		"id": 533,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 320000,
+		"start": 174140000,
+		"end": 174460000
+	},
+	{
+		"name": "TAD_507",
+		"id": 534,
+		"chromosome": "chr1",
+		"parent": 145,
+		"value": 250000,
+		"start": 172380000,
+		"end": 172630000
+	},
+	{
+		"name": "TAD_505",
+		"id": 535,
+		"chromosome": "chr1",
+		"parent": 531,
+		"value": 200000,
+		"start": 171800000,
+		"end": 172000000
+	},
+	{
+		"name": "TAD_510",
+		"id": 536,
+		"chromosome": "chr1",
+		"parent": 529,
+		"value": 700000,
+		"start": 173425000,
+		"end": 174125000
+	},
+	{
+		"name": "TAD_511",
+		"id": 537,
+		"chromosome": "chr1",
+		"parent": 536,
+		"value": 230000,
+		"start": 173470000,
+		"end": 173700000
+	},
+	{
+		"name": "TAD_512",
+		"id": 538,
+		"chromosome": "chr1",
+		"parent": 536,
+		"value": 200000,
+		"start": 173790000,
+		"end": 173990000
+	},
+	{
+		"name": "TAD_515",
+		"id": 539,
+		"chromosome": "chr1",
+		"parent": 528,
+		"value": 425000,
+		"start": 174575000,
+		"end": 175000000
+	},
+	{
+		"name": "TAD_519",
+		"id": 540,
+		"chromosome": "chr1",
+		"parent": 543,
+		"value": 280000,
+		"start": 176410000,
+		"end": 176690000
+	},
+	{
+		"name": "TAD_518",
+		"id": 541,
+		"chromosome": "chr1",
+		"parent": 543,
+		"value": 270000,
+		"start": 175930000,
+		"end": 176200000
+	},
+	{
+		"name": "TAD_521",
+		"id": 542,
+		"chromosome": "chr1",
+		"parent": 527,
+		"value": 950000,
+		"start": 176800000,
+		"end": 177750000
+	},
+	{
+		"name": "TAD_516",
+		"id": 543,
+		"chromosome": "chr1",
+		"parent": 527,
+		"value": 800000,
+		"start": 175900000,
+		"end": 176700000
+	},
+	{
+		"name": "TAD_520",
+		"id": 544,
+		"chromosome": "chr1",
+		"parent": 527,
+		"value": 150000,
+		"start": 176710000,
+		"end": 176860000
+	},
+	{
+		"name": "TAD_523",
+		"id": 545,
+		"chromosome": "chr1",
+		"parent": 542,
+		"value": 460000,
+		"start": 177250000,
+		"end": 177710000
+	},
+	{
+		"name": "TAD_522",
+		"id": 546,
+		"chromosome": "chr1",
+		"parent": 542,
+		"value": 350000,
+		"start": 176850000,
+		"end": 177200000
+	},
+	{
+		"name": "TAD_528",
+		"id": 547,
+		"chromosome": "chr1",
+		"parent": 147,
+		"value": 960000,
+		"start": 178500000,
+		"end": 179460000
+	},
+	{
+		"name": "TAD_527",
+		"id": 548,
+		"chromosome": "chr1",
+		"parent": 147,
+		"value": 160000,
+		"start": 178300000,
+		"end": 178460000
+	},
+	{
+		"name": "TAD_526",
+		"id": 549,
+		"chromosome": "chr1",
+		"parent": 147,
+		"value": 140000,
+		"start": 178130000,
+		"end": 178270000
+	},
+	{
+		"name": "TAD_529",
+		"id": 550,
+		"chromosome": "chr1",
+		"parent": 547,
+		"value": 650000,
+		"start": 178510000,
+		"end": 179160000
+	},
+	{
+		"name": "TAD_532",
+		"id": 551,
+		"chromosome": "chr1",
+		"parent": 149,
+		"value": 400000,
+		"start": 179800000,
+		"end": 180200000
+	},
+	{
+		"name": "TAD_534",
+		"id": 552,
+		"chromosome": "chr1",
+		"parent": 149,
+		"value": 310000,
+		"start": 180250000,
+		"end": 180560000
+	},
+	{
+		"name": "TAD_533",
+		"id": 553,
+		"chromosome": "chr1",
+		"parent": 552,
+		"value": 170000,
+		"start": 180250000,
+		"end": 180420000
+	},
+	{
+		"name": "TAD_539",
+		"id": 554,
+		"chromosome": "chr1",
+		"parent": 153,
+		"value": 540000,
+		"start": 181250000,
+		"end": 181790000
+	},
+	{
+		"name": "TAD_543",
+		"id": 555,
+		"chromosome": "chr1",
+		"parent": 153,
+		"value": 230000,
+		"start": 181890000,
+		"end": 182120000
+	},
+	{
+		"name": "TAD_545",
+		"id": 556,
+		"chromosome": "chr1",
+		"parent": 153,
+		"value": 180000,
+		"start": 182140000,
+		"end": 182320000
+	},
+	{
+		"name": "TAD_541",
+		"id": 557,
+		"chromosome": "chr1",
+		"parent": 554,
+		"value": 350000,
+		"start": 181260000,
+		"end": 181610000
+	},
+	{
+		"name": "TAD_542",
+		"id": 558,
+		"chromosome": "chr1",
+		"parent": 554,
+		"value": 180000,
+		"start": 181610000,
+		"end": 181790000
+	},
+	{
+		"name": "TAD_546",
+		"id": 559,
+		"chromosome": "chr1",
+		"parent": 154,
+		"value": 190000,
+		"start": 182350000,
+		"end": 182540000
+	},
+	{
+		"name": "TAD_547",
+		"id": 560,
+		"chromosome": "chr1",
+		"parent": 562,
+		"value": 400000,
+		"start": 182550000,
+		"end": 182950000
+	},
+	{
+		"name": "TAD_551",
+		"id": 561,
+		"chromosome": "chr1",
+		"parent": 155,
+		"value": 1375000,
+		"start": 183400000,
+		"end": 184775000
+	},
+	{
+		"name": "TAD_548",
+		"id": 562,
+		"chromosome": "chr1",
+		"parent": 155,
+		"value": 775000,
+		"start": 182550000,
+		"end": 183325000
+	},
+	{
+		"name": "TAD_550",
+		"id": 563,
+		"chromosome": "chr1",
+		"parent": 155,
+		"value": 140000,
+		"start": 183280000,
+		"end": 183420000
+	},
+	{
+		"name": "TAD_553",
+		"id": 564,
+		"chromosome": "chr1",
+		"parent": 561,
+		"value": 750000,
+		"start": 183500000,
+		"end": 184250000
+	},
+	{
+		"name": "TAD_554",
+		"id": 565,
+		"chromosome": "chr1",
+		"parent": 561,
+		"value": 500000,
+		"start": 184260000,
+		"end": 184760000
+	},
+	{
+		"name": "TAD_552",
+		"id": 566,
+		"chromosome": "chr1",
+		"parent": 564,
+		"value": 220000,
+		"start": 183500000,
+		"end": 183720000
+	},
+	{
+		"name": "TAD_555",
+		"id": 567,
+		"chromosome": "chr1",
+		"parent": 565,
+		"value": 310000,
+		"start": 184440000,
+		"end": 184750000
+	},
+	{
+		"name": "TAD_556",
+		"id": 568,
+		"chromosome": "chr1",
+		"parent": 156,
+		"value": 425000,
+		"start": 184800000,
+		"end": 185225000
+	},
+	{
+		"name": "TAD_558",
+		"id": 569,
+		"chromosome": "chr1",
+		"parent": 156,
+		"value": 210000,
+		"start": 185210000,
+		"end": 185420000
+	},
+	{
+		"name": "TAD_561",
+		"id": 570,
+		"chromosome": "chr1",
+		"parent": 572,
+		"value": 270000,
+		"start": 186450000,
+		"end": 186720000
+	},
+	{
+		"name": "TAD_563",
+		"id": 571,
+		"chromosome": "chr1",
+		"parent": 157,
+		"value": 2175000,
+		"start": 186750000,
+		"end": 188925000
+	},
+	{
+		"name": "TAD_559",
+		"id": 572,
+		"chromosome": "chr1",
+		"parent": 157,
+		"value": 1230000,
+		"start": 185500000,
+		"end": 186730000
+	},
+	{
+		"name": "TAD_567",
+		"id": 573,
+		"chromosome": "chr1",
+		"parent": 157,
+		"value": 690000,
+		"start": 188250000,
+		"end": 188940000
+	},
+	{
+		"name": "TAD_564",
+		"id": 574,
+		"chromosome": "chr1",
+		"parent": 576,
+		"value": 220000,
+		"start": 186770000,
+		"end": 186990000
+	},
+	{
+		"name": "TAD_565",
+		"id": 575,
+		"chromosome": "chr1",
+		"parent": 571,
+		"value": 1325000,
+		"start": 186775000,
+		"end": 188100000
+	},
+	{
+		"name": "TAD_562",
+		"id": 576,
+		"chromosome": "chr1",
+		"parent": 571,
+		"value": 625000,
+		"start": 186750000,
+		"end": 187375000
+	},
+	{
+		"name": "TAD_566",
+		"id": 577,
+		"chromosome": "chr1",
+		"parent": 575,
+		"value": 575000,
+		"start": 187425000,
+		"end": 188000000
+	},
+	{
+		"name": "TAD_571",
+		"id": 578,
+		"chromosome": "chr1",
+		"parent": 159,
+		"value": 375000,
+		"start": 189250000,
+		"end": 189625000
+	},
+	{
+		"name": "TAD_570",
+		"id": 579,
+		"chromosome": "chr1",
+		"parent": 159,
+		"value": 230000,
+		"start": 189010000,
+		"end": 189240000
+	},
+	{
+		"name": "TAD_572",
+		"id": 580,
+		"chromosome": "chr1",
+		"parent": 159,
+		"value": 230000,
+		"start": 189700000,
+		"end": 189930000
+	},
+	{
+		"name": "TAD_574",
+		"id": 581,
+		"chromosome": "chr1",
+		"parent": 160,
+		"value": 900000,
+		"start": 189950000,
+		"end": 190850000
+	},
+	{
+		"name": "TAD_581",
+		"id": 582,
+		"chromosome": "chr1",
+		"parent": 162,
+		"value": 230000,
+		"start": 191320000,
+		"end": 191550000
+	},
+	{
+		"name": "TAD_582",
+		"id": 583,
+		"chromosome": "chr1",
+		"parent": 162,
+		"value": 230000,
+		"start": 191580000,
+		"end": 191810000
+	},
+	{
+		"name": "TAD_578",
+		"id": 584,
+		"chromosome": "chr1",
+		"parent": 162,
+		"value": 170000,
+		"start": 191120000,
+		"end": 191290000
+	},
+	{
+		"name": "TAD_577",
+		"id": 585,
+		"chromosome": "chr1",
+		"parent": 162,
+		"value": 150000,
+		"start": 190930000,
+		"end": 191080000
+	},
+	{
+		"name": "TAD_583",
+		"id": 586,
+		"chromosome": "chr1",
+		"parent": 163,
+		"value": 1200000,
+		"start": 191950000,
+		"end": 193150000
+	},
+	{
+		"name": "TAD_579",
+		"id": 587,
+		"chromosome": "chr1",
+		"parent": 163,
+		"value": 675000,
+		"start": 191250000,
+		"end": 191925000
+	},
+	{
+		"name": "TAD_584",
+		"id": 588,
+		"chromosome": "chr1",
+		"parent": 586,
+		"value": 560000,
+		"start": 192150000,
+		"end": 192710000
+	},
+	{
+		"name": "TAD_585",
+		"id": 589,
+		"chromosome": "chr1",
+		"parent": 586,
+		"value": 400000,
+		"start": 192725000,
+		"end": 193125000
+	},
+	{
+		"name": "TAD_590",
+		"id": 590,
+		"chromosome": "chr1",
+		"parent": 165,
+		"value": 500000,
+		"start": 193725000,
+		"end": 194225000
+	},
+	{
+		"name": "TAD_589",
+		"id": 591,
+		"chromosome": "chr1",
+		"parent": 165,
+		"value": 260000,
+		"start": 193430000,
+		"end": 193690000
+	}
+];
+					// add the data
+					var treeData = anychart.data.tree(data, 'as-table');
+      
+					// create a circle packing chart instance
+					var chart = anychart.circlePacking(treeData);
+      
+					//customize the tooltip
+					//.toExponential()
+					chart
+						.tooltip()
+						.useHtml(true)
+						.format(function () {
+							return '<div>'
+									+ '<span>Chromosome: ' + this.item.get('chromosome') + '</span><br/>'
+									+ '<span>Size: ' + this.value + '</span><br/>'
+									+ '<span>Start: ' + this.item.get('start') + '</span><br/>'
+									+ '<span>End: ' + this.item.get('end') + '</span>'
+									+ '</div>' 
+						});
+      
+					// add a chart title
+					chart
+						.title()
+						.enabled(true)
+						.useHtml(true)
+						.text(
+							'<span style = "color: #112B3C;font-weight:600;font-size:18px;">Circular_Packing_Chr1</span>'
+						);
+
+					// customize the appearance
+					// Adjust thickness to 1 or 0.25
+
+					chart.background('#f6f6f6');
+					chart
+						.hovered()
+						.stroke(function () {
+							return {
+								thickness: 0.7,
+							};
+						});
+					chart
+						.stroke(function () {
+							return {
+								thickness: 0.3,
+							};
+						});
+
+					// customize the labels
+					chart
+						.labels()
+						.fontSize('14')
+						.fontColor('#696969')
+						.textShadow('none')
+						.anchor('center-top').offsetY('-3%');
+
+					chart.labels()
+						.background()
+						.enabled(true)
+						.fill("#f6f6f6 0.8")
+						.stroke("#888888")
+						.corners(5);	
+
+					// specify the container element id
+					chart.container('container');
+
+					// initiate the drawing of the chart
+					chart.draw();
+
+					}
+				);
+	</script>
+</html>
+
