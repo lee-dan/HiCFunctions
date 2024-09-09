@@ -1,12 +1,26 @@
-# Daniel Lee
-# Program to generate TAD Hierarchy
+# This program generates a hierarchy list for each TAD, detailing each of its 'children' TADs.
 
-library(GenomicRanges)
-library(magrittr)
-library(dplyr)
-library(data.table)
+# Format:
+# Rscript TADHierarchy.R --inputFile ... --outputDirectory ... --threshold ...
 
-# Receive input on TAD directory and resolutions 
+# Args:
+# --inputFile: The .bedpe file containing the list of TADs.
+# --outputDirectory**: The directory in which the TAD hierarchy will be placed in.
+# -threshold**: The minimum overlap percentage [0 to 1] for a TAD to be considered a 'child' TAD of another TAD.
+# The recommended value is 1.0.
+
+# Example:
+# Rscript TADHierarchy.R --inputFile sampleTADs.bedpe --outputDirectory outDir --threshold 1.0
+
+suppressWarnings({
+  suppressPackageStartupMessages(library(GenomicRanges, warn.conflicts = FALSE))
+  library(magrittr, warn.conflicts = FALSE)
+  library(dplyr, warn.conflicts = FALSE)
+  library(progress, warn.conflicts = FALSE)
+  library(data.table, warn.conflicts = FALSE)
+})
+
+# Read user-inputted parameters:
 args <- commandArgs(trailingOnly = TRUE)
 argsList <- paste(unlist(args), collapse = ' ')
 listoptions <- unlist(strsplit(argsList, '--'))[-1]
@@ -42,8 +56,15 @@ TADhierarchy <- list()
 # Iterate through each chromosome to generate its respective TAD hierarchy
 # List of unique chromosomes in TAD file
 uniqueChromosomes <- unique(TADList$seqnames)
+
+# Progress Bar:
+pb <- progress_bar$new(format = paste("Processing TADs: [:bar] :percent eta: :eta"),
+total = length(uniqueChromosomes),
+clear = FALSE)
+
 for (i in 1:length(uniqueChromosomes)) {
-  
+  pb$tick()
+
   # Create TAD hierarchy array for current chromosome to be appended to 
   # TAD hierarchy
   TADhierachyLevel <- list()

@@ -1,14 +1,23 @@
-# Program to visualize TAD hierarchy
+# This program creates an interactive circular packing visualization for a given set of TADs. 
 
-# --inputFile = file name for TAD hierarchy
-# --chromosome = chromosome
-# --start = start
-# --end = end
-# --merge = choose bigger or smaller parent ("Smaller" / "Bigger")
-# --title = title of the chart (no spaces)
-# --outputFile = name of output file (without .html)
+# Format:
+# Rscript circularPackingTAD.R --inputFile ... --chromosome ... --start ... --end ... --merge ... --title ... --outputFile ...
 
-# Retrieve User-inputted parameters
+# Args:
+# --inputFile**: The .bedpe file containing the hierarchal list of TADs.
+# --chromosome**: Specifies which chromosome will be visualized.
+# --start**: The starting index (lower bound) of the genomic range to be visualized
+# --end**: The ending index (upper bound) of the genomic range to be visualized
+# --merge**: Specify the *merging* method:
+# I.e. For TADs that are a subTAD of two unique, nonhierarchal TADs (that is, neither one is a child of the other), the program will choose either the bigger parent TAD or the smaller parent TAD. 
+# Enter "Bigger" or "Smaller". The default is "Bigger".
+# --title**: The title of the chart to be created (NO SPACES)
+# --outputFile**: The name of the output file to be created (omit file ending: .html)
+
+# Example:
+# Rscript circularPackingTAD.R --inputFile TADHierarchy.bedpe --chromosome chr19 --start 43000000 --end 47000000 --merge Bigger --title TAD_Circular_Packing_Chart --outputFile TAD_Circular_Packing_Chart
+
+# Read user-inputted parameters:
 args <- commandArgs(trailingOnly = TRUE)
 argsList <- paste(unlist(args), collapse = ' ')
 listoptions <- unlist(strsplit(argsList, '--'))[-1]
@@ -28,6 +37,7 @@ merge <- options.args$merge
 title <- options.args$title
 outFile <- options.args$outputFile
 
+# Catch for formatting issues
 if (merge != "Bigger" && merge != "Smaller") {
   merge = "Bigger"
 }
@@ -39,7 +49,7 @@ colnames(tads) <- c("chr1", "x1", "x2",
                     "identifier", "children")
 tads <- tads[tads$chr1 == chromosome & tads$x1 >= start & tads$x2 <= end,]  
 
-# Select TADs that are independent (i.e. they have no relatives)
+# As a first pass, select all TADs that are independent (i.e. they have no relatives)
 master_data_edge <- data.frame(matrix(ncol = 2, nrow = 0))
 tadsThatAreChildren <- strsplit(gsub('[.,;]', '', toString(tads$children)), " ")[[1]][nchar(strsplit(gsub('[.,;]', '', toString(tads$children)), " ")[[1]]) > 1]
 for (tad in tads$identifier) {
@@ -58,7 +68,7 @@ getChildren <- function(tad) {
   if (tads$children[index] == ".") {
     return (c())
   }
-  return( strsplit(tads$children[index], "; ")[[1]])
+  return(strsplit(tads$children[index], "; ")[[1]])
 }
 
 # For each TAD, iterate through its children, and add edges that correspond
@@ -135,7 +145,7 @@ setClass("TAD", slots = list(name = "character",
                              start = "numeric",
                              end = "numeric"))
   
-# Create list of Tads
+# Create List of Tads
 TADList <- c()
 for (i in 1:nrow(data_edge)) {
   if (data_edge$to[i] == " ") {
@@ -201,6 +211,7 @@ for (tad in TADList) {
 }
 json <- paste(json, "\n]", sep = "")
 
+# Create an HTML file using circular packing functions from cdn.anychart.com 
 jsonFile <- paste(
 "
 <!DOCTYPE html>
@@ -310,6 +321,7 @@ title,
 ",
 sep = "")
 
+# Write html file
 fileConn <- file(paste(outFile, ".html", sep=""))
 writeLines(jsonFile, fileConn)
 close(fileConn)

@@ -17,9 +17,12 @@
 # Example:
 # Rscript TADMerger.R --inputDirectory inDir --resolutions 10000 25000 --threshold 0.7 --outputDirectory outDir
 
-library(GenomicRanges)
-library(magrittr)
-library(dplyr)
+suppressWarnings({
+  suppressPackageStartupMessages(library(GenomicRanges, warn.conflicts = FALSE))
+  library(magrittr, warn.conflicts = FALSE)
+  library(dplyr, warn.conflicts = FALSE)
+  library(progress, warn.conflicts = FALSE)
+})
 
 # Read user-inputted parameters:
 args <- commandArgs(trailingOnly = TRUE)
@@ -38,8 +41,8 @@ TADthreshold <- as.double(options.args$threshold)
 outDir <- options.args$outputDirectory
 
 # Convert resolutions into .bedpe file names
-for (resolution in resolutions) {
-  resolution <- paste(resolution, "_blocks.bedpe")
+for (i in 1:length(resolutions)) {
+  resolutions[i] = paste(resolutions[i], "_blocks.bedpe", sep="")
 }
 
 # Create an empty "merged list" of unique TADs across all resolutions
@@ -50,11 +53,9 @@ for (resolution in resolutions) {
   # Create a label for each resolution (i.e. "10kb_resolution", 
   # "25kb_resolution", etc.)
   shortFileName <- paste(sub("000_blocks.bedpe.*", "", resolution), "kb_resolution", sep="")
-
-  print(paste("Currently processing", shortFileName))
   
   # Read the data from the .bedpe file to be stored as a dataframe
-  TADdf <- read.table(file=normalizePath(paste(inDir, "/", resolution, "_blocks.bedpe", sep="")), sep="\t")
+  TADdf <- read.table(file=normalizePath(paste(inDir, "/", resolution, sep="")), sep="\t")
   colnames(TADdf) <- c("chr1",	"x1", "x2", 
                        "chr2", "y1", "y2", 
                        "name",	"score", "strand1",	"strand2", "color", "score", "uVarScore", "lVarScore", "upSign", "loSign")
@@ -71,10 +72,15 @@ for (resolution in resolutions) {
   # Append metadata to TAD dataframe
   TADdf <- cbind(TADdf, TADidentifiers)
   
+  # Progress Bar:
+  pb <- progress_bar$new(format = paste("Processing TADs at ", shortFileName, " [:bar] :percent eta: :eta", sep=""),
+  total = nrow(TADdf), clear = FALSE)
+  pb$tick(0)
+
   # Iterate through each TAD
   for (i in 1:nrow(TADdf)) {
-    print(paste(i, " / ", nrow(TADdf), "TADs processed at ", shortFileName, sep=""))
-    
+    pb$tick()
+
     # Extract information about the TAD
     TADseqname = TADdf[i, "chr1"]
     TADstart = TADdf[i, "x1"]
@@ -94,13 +100,17 @@ for (resolution in resolutions) {
     
     # First, find all TADs in the list of merged TADs thus far that overlap with 
     # the given TAD
-    overlaps <- findOverlaps(TADasGR, uniqueTADs, select = "all")
-    
+    suppressWarnings({
+      overlaps <- findOverlaps(TADasGR, uniqueTADs, select = "all")
+    })
+
     # If there are no overlapping TADs, then this TAD is unique
     if (length(overlaps) == 0) {
       # Add TAD to list of merged TADs
-      uniqueTADs <- uniqueTADs %>%
-        append(TADasGR)
+      suppressWarnings({
+        uniqueTADs <- uniqueTADs %>%
+          append(TADasGR)
+      })
     } else {
       # Otherwise, iterate through the overlapping TADs:
       overlappingTADs <- subjectHits(overlaps)
@@ -136,8 +146,10 @@ for (resolution in resolutions) {
       # If no overlaps greater than [TADthreshold] were found, then the TAD is unique
       # and will be added to the list of unique TADs.
       if (isTADUnique) {
-        uniqueTADs <- uniqueTADs %>%
-          append(TADasGR)
+        suppressWarnings({
+          uniqueTADs <- uniqueTADs %>%
+            append(TADasGR)
+        })
       }
     }
   }
@@ -170,3 +182,4 @@ writeLines(paste("#chr1", "\t",
 
 # Save list of uniqueTADs
 write.table(finalDF, normalizePath(paste(outDir, "/mergedTADs.bedpe", sep="")), row.names=FALSE, col.names = FALSE, append = TRUE, quote = FALSE, sep = "\t")
+

@@ -16,8 +16,8 @@ Rscript TADMerger.R --inputDirectory ... --outputDirectory ... --resolutions ...
 * **--inputDirectory**: The directory which contains the .bedpe files of TADs
 * **--outputDirectory**: The directory in which the merged TADs will be placed in
 * **--resolutions**: The resolutions of TADs to be merged [e.g. 10000, 25000, 50000, etc.]
-* **--threshold**: The maximum percentage [0 to 1] of linear overlapped area between any two TADs in order for them to still be considered unique. That is, if the area shared by TAD A and TAD B is greater than or equal to [threshold] of the area of both TADs, then the two TADs will be merged. 
-    * Eg. The boundaries of TAD A are [0, 100,000], and the boundaries of TAD B are [20,000, 90,000]. If the [threshold] = 0.7, then TAD A and TAD B will be merged.
+* **--threshold**: If two TADs share more than [threshold] of their 'linear area' (distance from start index to end index), then the TADs will be 'merged'. 
+    * Eg. The boundaries of TAD A are [0, 100,000], and the boundaries of TAD B are [25,000, 110,000]. If [threshold] = 0.7, then TAD A and TAD B will be merged, forming a single TAD with boundaries [0, 110,000]. Their shared area is [100,000] - [25,000] = [75,000]. [75,000] > 0.7 x [100,000] (the area of TAD A), and [75,000] > 0.7 x [85,000] (the area of TAD B).
     *  **The recommended value is 0.7.**
 
 #### Example:
