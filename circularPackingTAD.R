@@ -44,7 +44,7 @@ master_data_edge <- data.frame(matrix(ncol = 2, nrow = 0))
 tadsThatAreChildren <- strsplit(gsub('[.,;]', '', toString(tads$children)), " ")[[1]][nchar(strsplit(gsub('[.,;]', '', toString(tads$children)), " ")[[1]]) > 1]
 for (tad in tads$identifier) {
   if (!(tad %in% tadsThatAreChildren)) {
-    master_data_edge <- rbind(master_data_edge, c("master", tad))
+    master_data_edge <- rbind(master_data_edge, c(" ", tad))
   }
 }
 colnames(master_data_edge) <- c("from", "to")
@@ -121,7 +121,7 @@ if (length(uniqueOnes) != length(data_edge$to)) {
 row.names(data_edge) <- 1:nrow(data_edge)
 
 # Add master TAD to edges list
-master <- data.frame(c(NA), c("master"))
+master <- data.frame(c(NA), c(" "))
 colnames(master) <- c("from", "to")
 master <- rbind(master, data_edge)
 data_edge <- master
@@ -138,7 +138,7 @@ setClass("TAD", slots = list(name = "character",
 # Create list of Tads
 TADList <- c()
 for (i in 1:nrow(data_edge)) {
-  if (data_edge$to[i] == "master") {
+  if (data_edge$to[i] == " ") {
     value1 = tads[nrow(tads), "x2"] - tads[1, "x1"]
     start1 = tads[1, "x1"]
     end1 = tads[nrow(tads), "x2"]
@@ -267,7 +267,7 @@ title,
 \t\t\t\t\t// customize the appearance
 \t\t\t\t\t// Adjust thickness to 1 or 0.25
 
-\t\t\t\t\tchart.background(\'#f6f6f6\');
+\t\t\t\t\tchart.background(\'#ffffff\');
 \t\t\t\t\tchart
 \t\t\t\t\t\t.hovered()
 \t\t\t\t\t\t.stroke(function () {

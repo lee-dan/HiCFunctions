@@ -1,20 +1,34 @@
-# Daniel Lee
-# Program to merge TADs at different resolutions
+# This program merges TADs at different resolutions based on a maximum allowed threshold of shared area.
+
+# Format:
+# Rscript TADMerger.R --inputDirectory ... --outputDirectory ... --resolutions ... --threshold ...
+
+# Args:
+# --inputDirectory: The directory which contains the .bedpe files of TADs
+# --outputDirectory: The directory in which the merged TADs will be placed in
+# --resolutions: The resolutions of TADs to be merged [e.g. 10000, 25000, 50000, etc.]
+# --threshold: If two TADs share more than [threshold] of their 'linear area' (distance from 
+# start index to end index), then the TADs will be 'merged'. The recommended value is 0.7 (i.e. 70%).
+# E.g. The boundaries of TAD A are [0, 100,000], and the boundaries of TAD B are [25,000, 110,000]. 
+# If [threshold] = 0.7, then TAD A and TAD B will be merged, forming a single TAD with boundaries [0, 110,000].
+# Their shared area is [100,000] - [25,000] = [75,000]. [75,000] > 0.7 x [100,000] (the area of TAD A), and 
+# [75,000] > 0.7 x [85,000] (the area of TAD B).
+
+# Example:
+# Rscript TADMerger.R --inputDirectory inDir --resolutions 10000 25000 --threshold 0.7 --outputDirectory outDir
 
 library(GenomicRanges)
 library(magrittr)
 library(dplyr)
 
-#__________Merge TADs__________
-
-# Receive input on TAD directory and resolutions 
+# Read user-inputted parameters:
 args <- commandArgs(trailingOnly = TRUE)
 argsList <- paste(unlist(args), collapse = ' ')
 listoptions <- unlist(strsplit(argsList, '--'))[-1]
-options.args <- sapply(listoptions, function(x){
+options.args <- sapply(listoptions, function(x) {
   unlist(strsplit(x, ' '))[-1]
 }, simplify = FALSE)
-options.names <- sapply(listoptions, function(x){
+options.names <- sapply(listoptions, function(x) {
   option <- unlist(strsplit(x, ' '))[1]
 })
 names(options.args) <- unlist(options.names)
@@ -23,6 +37,7 @@ resolutions <- options.args$resolutions
 TADthreshold <- as.double(options.args$threshold)
 outDir <- options.args$outputDirectory
 
+# Convert resolutions into .bedpe file names
 for (resolution in resolutions) {
   resolution <- paste(resolution, "_blocks.bedpe")
 }
@@ -32,10 +47,11 @@ uniqueTADs <- GRanges()
 
 # Iterate through each resolution 
 for (resolution in resolutions) {
-  print(paste(resolution, "kb", sep=""))
   # Create a label for each resolution (i.e. "10kb_resolution", 
   # "25kb_resolution", etc.)
   shortFileName <- paste(sub("000_blocks.bedpe.*", "", resolution), "kb_resolution", sep="")
+
+  print(paste("Currently processing", shortFileName))
   
   # Read the data from the .bedpe file to be stored as a dataframe
   TADdf <- read.table(file=normalizePath(paste(inDir, "/", resolution, "_blocks.bedpe", sep="")), sep="\t")
@@ -57,6 +73,7 @@ for (resolution in resolutions) {
   
   # Iterate through each TAD
   for (i in 1:nrow(TADdf)) {
+    print(paste(i, " / ", nrow(TADdf), "TADs processed at ", shortFileName, sep=""))
     
     # Extract information about the TAD
     TADseqname = TADdf[i, "chr1"]
